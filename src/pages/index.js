@@ -1,30 +1,29 @@
 import { useState } from "react";
 import Head from "next/head";
-import axios from "axios";
 import searchCocktail from "./api/searchCocktail";
-import SearchResponse from "../components/SearchResponse";
 
 export default function Home() {
+  // Added new usestate() to toggle drink list visibility
+  const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const [results, setResults] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await searchCocktail(searchTerm);
-    setSearchResult(result);
+    const data = await searchCocktail(searchTerm);
+    setResults(data);
     setSearchTerm("");
-  };
-
-  const printResults = () => {
-    return searchResult.map((cocktail) => (
-      <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
-    ));
+    setShowCocktails(true);
   };
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  // Couldn't map over results because you can't map over objects, but
+  // results.drinks is an array so we can map over that. The logic
+  // below checks whether or not results.drinks is empty, and if not
+  // it displays the list of drinks.
   return (
     <div>
       <Head>
@@ -43,32 +42,16 @@ export default function Home() {
             <input type="text" value={searchTerm} onChange={handleChange} />
             <button type="submit">Search</button>
           </form>
-          <div>
-            <div>
-              <SearchResponse props={searchResult} />
-            </div>
-            {
-              searchResult &&
-                searchResult.length !== 0 &&
-                searchResult.map((cocktail) => (
-                  <ul>
-                    <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
-                    <li>example</li>
-                  </ul>
-                ))
-              /* <div>
-            {searchResult ? (
-              searchResult.map((cocktail) => (
-                <ul>
-                  <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
-                </ul>
-              ))
-            ) : (
-              <div>Loading...</div>
-            )}
-            </div> */
-            }
-          </div>
+          {results.drinks && (
+            <ul>
+              {results.drinks.map((result) => (
+                <li key={result.idDrink}>{result.strDrink}</li>
+              ))}
+            </ul>
+          )}
+          {!results.drinks && showCocktails === true && (
+            <div>Sorry! No cocktails found. Try another search!</div>
+          )}
         </div>
       </main>
     </div>
