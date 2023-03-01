@@ -55,7 +55,11 @@ export default function Home() {
             <ul id={styles.ul}>
               {results.drinks.map((result) => (
                 <li key={result.idDrink} id={styles.li}>
-                  {result.strDrink}: {result.strAlcoholic}
+                  <h3 id={styles.h3}>
+                    {result.strDrink}
+                    <h4 id={styles.h4}>{result.strAlcoholic}</h4>
+                  </h3>
+                  <img id={styles.img} src={result.strDrinkThumb} />
                 </li>
               ))}
             </ul>
