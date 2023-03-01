@@ -2,6 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import axios from "axios";
 import searchCocktail from "./api/searchCocktail";
+import SearchResponse from "../components/SearchResponse";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,11 +16,9 @@ export default function Home() {
   };
 
   const printResults = () => {
-    let str = "";
-    return "searchResult";
-    // searchResult.map((cocktail) => (
-    //   <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
-    // ));
+    return searchResult.map((cocktail) => (
+      <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
+    ));
   };
 
   const handleChange = (e) => {
@@ -44,9 +43,32 @@ export default function Home() {
             <input type="text" value={searchTerm} onChange={handleChange} />
             <button type="submit">Search</button>
           </form>
-          <ul>
-            <li>{printResults}</li>
-          </ul>
+          <div>
+            <div>
+              <SearchResponse props={searchResult} />
+            </div>
+            {
+              searchResult &&
+                searchResult.length !== 0 &&
+                searchResult.map((cocktail) => (
+                  <ul>
+                    <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
+                    <li>example</li>
+                  </ul>
+                ))
+              /* <div>
+            {searchResult ? (
+              searchResult.map((cocktail) => (
+                <ul>
+                  <li key={cocktail.idDrink}>{cocktail.strDrink}</li>
+                </ul>
+              ))
+            ) : (
+              <div>Loading...</div>
+            )}
+            </div> */
+            }
+          </div>
         </div>
       </main>
     </div>
