@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   // Added new usestate() to toggle drink list visibility
@@ -29,23 +30,33 @@ export default function Home() {
       <Head>
         <title>My Cocktail App</title>
         <link rel="icon" href="/favicon.ico" />
+        <link href="Home.module.css" rel="stylesheet" />
       </Head>
 
-      <main>
-        <h1>Welcome to Our Cocktail App!</h1>
-        <p>
+      <main className={styles.container}>
+        <h1 id={styles.h1}>Welcome to Our Cocktail App!</h1>
+        <p id={styles.p}>
           Get started by searching for your favorite cocktail or browsing our
           collection.
         </p>
-        <div>
+        <div id={styles.form}>
           <form onSubmit={handleSubmit}>
-            <input type="text" value={searchTerm} onChange={handleChange} />
-            <button type="submit">Search</button>
+            <input
+              id={styles.input}
+              type="text"
+              value={searchTerm}
+              onChange={handleChange}
+            />
+            <button className={styles.btn} type="submit">
+              Search
+            </button>
           </form>
           {results.drinks && (
-            <ul>
+            <ul id={styles.ul}>
               {results.drinks.map((result) => (
-                <li key={result.idDrink}>{result.strDrink}</li>
+                <li key={result.idDrink} id={styles.li}>
+                  {result.strDrink}: {result.strAlcoholic}
+                </li>
               ))}
             </ul>
           )}
