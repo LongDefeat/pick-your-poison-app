@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// Modified the searchCocktail component to return the response
-// so that it can be used in index.js
-
 async function searchCocktail(data) {
   try {
     const response = axios({
