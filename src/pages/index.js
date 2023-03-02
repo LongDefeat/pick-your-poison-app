@@ -4,7 +4,6 @@ import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  // Added new usestate() to toggle drink list visibility
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
