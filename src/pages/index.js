@@ -21,10 +21,6 @@ export default function Home() {
     setSearchTerm(e.target.value);
   };
 
-  // Couldn't map over results because you can't map over objects, but
-  // results.drinks is an array so we can map over that. The logic
-  // below checks whether or not results.drinks is empty, and if not
-  // it displays the list of drinks.
   return (
     <div>
       <Head>
