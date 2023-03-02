@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Head from "next/head";
+import Card from "../components/UI/Card";
 import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  // Added new usestate() to toggle drink list visibility
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -11,6 +13,7 @@ export default function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = await searchCocktail(searchTerm);
+    console.log(data);
     setResults(data);
     setSearchTerm("");
     setShowCocktails(true);
@@ -46,23 +49,29 @@ export default function Home() {
               Search
             </button>
           </form>
-          {results.drinks && (
-            <ul id={styles.ul}>
-              {results.drinks.map((result) => (
-                <li key={result.idDrink} id={styles.li}>
-                  <h3 id={styles.h3}>
-                    {result.strDrink}
-                    <h4 id={styles.h4}>{result.strAlcoholic}</h4>
-                  </h3>
-                  <img id={styles.img} src={result.strDrinkThumb} />
-                </li>
-              ))}
-            </ul>
-          )}
-          {!results.drinks && showCocktails === true && (
-            <div>Sorry! No cocktails found. Try another search!</div>
-          )}
         </div>
+        {results.drinks && (
+        <ul id={styles.ul}>
+          <div id={styles.row}>
+            {results.drinks.map((result) => (
+              <div id={styles.column}>
+                <Card>
+                  <li key={result.idDrink}>
+                    <h3 id={styles.h3}>
+                      {result.strDrink}
+                      <h4 id={styles.h4}>{result.strAlcoholic}</h4>
+                    </h3>
+                    <img src={result.strDrinkThumb} id={styles.img}/>
+                  </li>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </ul>
+        )}
+        {!results.drinks && showCocktails === true && (
+          <div>Sorry! No cocktails found. Try another search!</div>
+        )}  
       </main>
     </div>
   );
