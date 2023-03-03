@@ -2,6 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
+import RecipeCard from "../components/RecipeCard";
 
 export default function Home() {
   // Added new usestate() to toggle drink list visibility
@@ -54,13 +55,20 @@ export default function Home() {
           {results.drinks && (
             <ul id={styles.ul}>
               {results.drinks.map((result) => (
-                <li key={result.idDrink} id={styles.li}>
-                  <h3 id={styles.h3}>
-                    {result.strDrink}
-                    <h4 id={styles.h4}>{result.strAlcoholic}</h4>
-                  </h3>
-                  <img id={styles.img} src={result.strDrinkThumb} />
-                </li>
+                // <li key={result.idDrink} id={styles.li}>
+                //   <h3 id={styles.h3}>
+                //     {result.strDrink}
+                //     <h4 id={styles.h4}>{result.strAlcoholic}</h4>
+                //   </h3>
+                //   <img id={styles.img} src={result.strDrinkThumb} />
+                // </li>
+
+                <RecipeCard
+                  key={result.idDrink}
+                  name={result.strDrink}
+                  image={result.strDrinkThumb}
+                  recipe={result.strInstructions}
+                />
               ))}
             </ul>
           )}
