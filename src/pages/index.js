@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import Card from "../components/UI/Card";
 import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
@@ -13,6 +14,7 @@ export default function Home() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = await searchCocktail(searchTerm);
+    console.log(data);
     setResults(data);
     setSearchTerm("");
     setShowCocktails(true);
@@ -22,10 +24,6 @@ export default function Home() {
     setSearchTerm(e.target.value);
   };
 
-  // Couldn't map over results because you can't map over objects, but
-  // results.drinks is an array so we can map over that. The logic
-  // below checks whether or not results.drinks is empty, and if not
-  // it displays the list of drinks.
   return (
     <div>
       <Head>
@@ -52,16 +50,22 @@ export default function Home() {
               Search
             </button>
           </form>
-          {results.drinks && (
-            <ul id={styles.ul}>
+        </div>
+        {results.drinks && (
+          <ul id={styles.ul}>
+            <div id={styles.row}>
               {results.drinks.map((result) => (
-                // <li key={result.idDrink} id={styles.li}>
-                //   <h3 id={styles.h3}>
-                //     {result.strDrink}
-                //     <h4 id={styles.h4}>{result.strAlcoholic}</h4>
-                //   </h3>
-                //   <img id={styles.img} src={result.strDrinkThumb} />
-                // </li>
+                // <div id={styles.column}>
+                //   <Card>
+                //     // <li key={result.idDrink}>
+                //     //   <h3 id={styles.h3}>
+                //     //     {result.strDrink}
+                //     //     <h4 id={styles.h4}>{result.strAlcoholic}</h4>
+                //     //   </h3>
+                //     //   <img src={result.strDrinkThumb} id={styles.img}/>
+                //     // </li>
+                //   </Card>
+                // </div>
 
                 <RecipeCard
                   key={result.idDrink}
@@ -70,12 +74,12 @@ export default function Home() {
                   recipe={result.strInstructions}
                 />
               ))}
-            </ul>
-          )}
-          {!results.drinks && showCocktails === true && (
-            <div>Sorry! No cocktails found. Try another search!</div>
-          )}
-        </div>
+            </div>
+          </ul>
+        )}
+        {!results.drinks && showCocktails === true && (
+          <div>Sorry! No cocktails found. Try another search!</div>
+        )}
       </main>
     </div>
   );
