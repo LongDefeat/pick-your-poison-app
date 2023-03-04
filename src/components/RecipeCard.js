@@ -8,7 +8,9 @@ function RecipeCard({ key, name, image, recipe }) {
         <div className={styles.cardContainer} key={key}>
           <h3 className={styles.cocktailName}>{name}</h3>
           <img src={image} className={styles.cardImage} />
-          <p className={styles.recipeInstructions}>{recipe}</p>
+          <div id={styles.instructionsBox}>
+            <p className={styles.recipeInstructions}>{recipe}</p>
+          </div>
         </div>
       </div>
     </>

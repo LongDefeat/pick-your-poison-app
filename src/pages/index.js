@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Head from "next/head";
-import Card from "../components/UI/Card";
 import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
@@ -29,15 +28,17 @@ export default function Home() {
         <title>My Cocktail App</title>
         <link rel="icon" href="/favicon.ico" />
         <link href="Home.module.css" rel="stylesheet" />
-        <link href='https://fonts.googleapis.com/css?family=Vibur:400' rel='stylesheet' type='text/css'></link>
+        <link
+          href="https://fonts.googleapis.com/css?family=Vibur:400"
+          rel="stylesheet"
+          type="text/css"
+        ></link>
       </Head>
       <main className={styles.container}>
-        <h1 id={styles.h1}>
-          Nightcapp
-        </h1>
+        <h1 id={styles.h1}>Nightcapp</h1>
         <p id={styles.p}>
-          Welcome to Nightcapp. Get started by searching for your favorite cocktail or browsing our
-          collection.
+          Welcome to Nightcapp. Get started by searching for your favorite
+          cocktail or browsing our collection.
         </p>
         <div id={styles.form}>
           <form onSubmit={handleSubmit}>
@@ -72,4 +73,4 @@ export default function Home() {
       </main>
     </div>
   );
-};
+}
