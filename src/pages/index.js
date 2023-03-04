@@ -6,7 +6,6 @@ import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
 
 export default function Home() {
-  // Added new usestate() to toggle drink list visibility
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
