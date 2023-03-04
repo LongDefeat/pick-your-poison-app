@@ -8,10 +8,53 @@
 }
 
 #h1 {
+  margin-top: 2rem;
+  margin-left: 9rem;
+  margin-right: 8rem;
+  margin-bottom: 1rem;
   display: flex;
+  align-content: center;
   justify-content: center;
-  align-items: center;
-  padding: 10px 10px;
+  font-family: "Vibur", sans-serif;
+  font-weight: 400;
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #f09,
+    0 0 82px #f09,
+    0 0 92px #f09,
+    0 0 102px #f09,
+    0 0 151px #f09;
+    font-size: 6rem;
+    animation: pulsate 0.11s ease-in-out infinite alternate;
+}
+
+@keyframes pulsate {   
+  100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #f09,
+      0 0 80px #f09,
+      0 0 90px #f09,
+      0 0 100px #f09,
+      0 0 150px #f09;  
+  } 
+  0% {
+    text-shadow:
+    0 0 4px #fff,
+    0 0 10px #fff,
+    0 0 18px #fff,
+    0 0 38px #f09,
+    0 0 73px #f09,
+    0 0 80px #f09,
+    0 0 94px #f09,
+    0 0 140px #f09;
+  }
 }
 
 #row {
@@ -30,32 +73,27 @@
 }
 
 .btn {
-  background-color: #0070f3;
-  color: #fff;
+  background-color: #d793bb;
+  color: #ecefe2;
   font-size: 15px;
   padding: 12px 24px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .btn:hover {
-  background-color: #4c8fdb;
-  color: #fff;
-  font-size: 15px;
-  padding: 12px 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  background-color: #8f88e6; 
 }
 
 #p {
   display: flex;
   justify-content: center;
   text-align: center;
-  font-size: 16px;
+  margin-bottom: 1.5rem;
+  font-size: 18px;
   line-height: 1.5;
-  color: #c1c0c0;
+  color: #C1B4CF;
 }
 
 #form {
