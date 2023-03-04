@@ -4,8 +4,6 @@
   border-radius: 5px;
   width: 305px;
   height: 400px;
-  overflow-x: auto;
-  flex-wrap: nowrap;
   margin: 20px;
   display: inline-block;
   color: #ecefe2;
@@ -45,10 +43,10 @@
   padding: 10px;
   font-size: 16px;
   margin-top: 10px;
-  overflow-x: auto;
 }
 
-/* #instructionsBox {
+#instructionsBox {
   flex-wrap: nowrap;
   overflow-x: auto;
-} */
+  height: 130px;
+}
