@@ -30,12 +30,14 @@ export default function Home() {
         <title>My Cocktail App</title>
         <link rel="icon" href="/favicon.ico" />
         <link href="Home.module.css" rel="stylesheet" />
+        <link href='https://fonts.googleapis.com/css?family=Vibur:400' rel='stylesheet' type='text/css'></link>
       </Head>
-
       <main className={styles.container}>
-        <h1 id={styles.h1}>Welcome to Our Cocktail App!</h1>
+        <h1 id={styles.h1}>
+          Nightcapp
+        </h1>
         <p id={styles.p}>
-          Get started by searching for your favorite cocktail or browsing our
+          Welcome to Nightcapp. Get started by searching for your favorite cocktail or browsing our
           collection.
         </p>
         <div id={styles.form}>
@@ -55,18 +57,6 @@ export default function Home() {
           <ul id={styles.ul}>
             <div id={styles.row}>
               {results.drinks.map((result) => (
-                // <div id={styles.column}>
-                //   <Card>
-                //     // <li key={result.idDrink}>
-                //     //   <h3 id={styles.h3}>
-                //     //     {result.strDrink}
-                //     //     <h4 id={styles.h4}>{result.strAlcoholic}</h4>
-                //     //   </h3>
-                //     //   <img src={result.strDrinkThumb} id={styles.img}/>
-                //     // </li>
-                //   </Card>
-                // </div>
-
                 <RecipeCard
                   key={result.idDrink}
                   name={result.strDrink}
@@ -83,4 +73,4 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
