@@ -18,7 +18,7 @@ export default function Home() {
     setDrinkName(name);
     setDrinkImg(img);
     setDrinkRecipe(recipe);
-    setShowDrinkRecipe(recipe);
+    setShowDrinkRecipe(true);
   };
 
   const handleSubmit = async (event) => {
