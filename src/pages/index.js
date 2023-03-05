@@ -3,19 +3,35 @@ import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
+import RecipeDetails from "../components/RecipeDetails";
 
 export default function Home() {
+  const [drinkName, setDrinkName] = useState("");
+  const [drinkImg, setDrinkImg] = useState("");
+  const [drinkRecipe, setDrinkRecipe] = useState("");
+  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
 
+  const setDrinkInfo = (name, img, recipe) => {
+    setDrinkName(name);
+    setDrinkImg(img);
+    setDrinkRecipe(recipe);
+    setShowDrinkRecipe(recipe);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = await searchCocktail(searchTerm);
-    console.log(data);
     setResults(data);
     setSearchTerm("");
     setShowCocktails(true);
+  };
+
+  const handleShowDrinkRecipe = (result) => {
+    setShowDrinkRecipe(true);
+    setDrinkInfo(result.strDrink, result.strDrinkThumb, result.strInstructions);
   };
 
   const handleChange = (e) => {
@@ -53,23 +69,32 @@ export default function Home() {
             </button>
           </form>
         </div>
-        {results.drinks && (
+        {!showDrinkRecipe && results.drinks && (
           <ul id={styles.ul}>
             <div id={styles.row}>
               {results.drinks.map((result) => (
-                <RecipeCard
-                  key={result.idDrink}
-                  id={result.idDrink}
-                  name={result.strDrink}
-                  image={result.strDrinkThumb}
-                  recipe={result.strInstructions}
-                />
+                <div onClick={() => handleShowDrinkRecipe(result)}>
+                  <RecipeCard
+                    key={result.idDrink}
+                    id={result.idDrink}
+                    name={result.strDrink}
+                    image={result.strDrinkThumb}
+                    recipe={result.strInstructions}
+                  />
+                </div>
               ))}
             </div>
           </ul>
         )}
-        {!results.drinks && showCocktails === true && (
+        {!showDrinkRecipe && !results.drinks && showCocktails === true && (
           <div>Sorry! No cocktails found. Try another search!</div>
+        )}
+        {showDrinkRecipe && (
+          <RecipeDetails 
+          name={drinkName}
+          image={drinkImg}
+          recipe={drinkRecipe}
+          />
         )}
       </main>
     </div>

@@ -1,11 +1,13 @@
 import React from "react";
-// import styles from "./styles/RecipeDetails.module.css";
+import styles from "./styles/RecipeDetails.module.css";
 
-export default function RecipeDetails() {
+export default function RecipeDetails(props) {
   return (
     <>
-      <div>
-        Hi
+      <div id="body">
+        <img src={props.image}></img>
+        <h1 id="h1">{props.name}</h1>
+        <p id="p">{props.recipe}</p>
       </div>
     </>
   );
