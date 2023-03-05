@@ -59,6 +59,7 @@ export default function Home() {
               {results.drinks.map((result) => (
                 <RecipeCard
                   key={result.idDrink}
+                  id={result.idDrink}
                   name={result.strDrink}
                   image={result.strDrinkThumb}
                   recipe={result.strInstructions}
