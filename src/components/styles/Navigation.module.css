@@ -1,5 +1,4 @@
 .nav {
-  background-color: #333;
   height: 60px;
   display: flex;
   align-items: center;
@@ -12,4 +11,45 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.navItem {
+  color: #f09;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+}
+
+.navItem:hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 5px;
+  background-color: #c1b4cf;
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

@@ -6,10 +6,10 @@ function Navigation() {
   return (
     <div className={styles.nav}>
       <ul className={styles.navList}>
-        <li>
+        <li className={styles.navItem}>
           <Link href="/">Home</Link>
         </li>
-        <li>
+        <li className={styles.navItem}>
           <Link href="/about">About Us</Link>
         </li>
       </ul>
