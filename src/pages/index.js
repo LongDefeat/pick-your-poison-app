@@ -4,6 +4,7 @@ import searchCocktail from "./api/searchCocktail";
 import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
+import Navigation from "../components/routes-nav/Navigation";
 
 export default function Home() {
   const [drinkName, setDrinkName] = useState("");
@@ -41,7 +42,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>My Cocktail App</title>
+        <title>Nightcapp</title>
         <link rel="icon" href="/favicon.ico" />
         <link href="Home.module.css" rel="stylesheet" />
         <link
@@ -51,6 +52,7 @@ export default function Home() {
         ></link>
       </Head>
       <main className={styles.container}>
+        <Navigation />
         <h1 id={styles.h1}>Nightcapp</h1>
         <p id={styles.p}>
           Welcome to Nightcapp. Get started by searching for your favorite
@@ -90,10 +92,10 @@ export default function Home() {
           <div>Sorry! No cocktails found. Try another search!</div>
         )}
         {showDrinkRecipe && (
-          <RecipeDetails 
-          name={drinkName}
-          image={drinkImg}
-          recipe={drinkRecipe}
+          <RecipeDetails
+            name={drinkName}
+            image={drinkImg}
+            recipe={drinkRecipe}
           />
         )}
       </main>
