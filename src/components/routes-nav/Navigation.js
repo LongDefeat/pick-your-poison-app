@@ -10,7 +10,9 @@ function Navigation() {
           <Link href="/">Home</Link>
         </li>
         <li className={styles.navItem}>
-          <Link href="/about">About Us</Link>
+          <Link href="/about" legacyBehavior>
+            About Us
+          </Link>
         </li>
       </ul>
     </div>
