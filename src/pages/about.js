@@ -1,11 +1,11 @@
 import React from "react";
-// import Navigation from "../../components/routes-nav/Navigation";
+import Navigation from "../components/routes-nav/Navigation";
 import styles from "../styles/About.module.css";
 
 function About() {
   return (
     <>
-      {/* <Navigation /> */}
+      <Navigation />
       <div className={styles.container}>
         <h1 id={styles.h1}>About Us</h1>
         <h3 id={styles.h3}>Welcome to our cocktail database!</h3>

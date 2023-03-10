@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
+import randomCocktail from "./api/randomCocktail";
 import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
@@ -14,6 +15,8 @@ export default function Home() {
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
+
+  const [randomDrink, setRandomDrink] = useState({});
 
   const setDrinkInfo = (name, img, recipe) => {
     setDrinkName(name);
@@ -68,6 +71,16 @@ export default function Home() {
             <button className={styles.btn} type="submit">
               Search
             </button>
+            <button
+              className={styles.btn}
+              onClick={async () => {
+                const data = await randomCocktail();
+                setRandomDrink(data.recipe);
+                setShowDrinkRecipe(true);
+              }}
+            >
+              Random
+            </button>
           </form>
         </div>
         {!showDrinkRecipe && results.drinks && (
@@ -90,11 +103,12 @@ export default function Home() {
         {!showDrinkRecipe && !results.drinks && showCocktails === true && (
           <div>Sorry! No cocktails found. Try another search!</div>
         )}
+
         {showDrinkRecipe && (
           <RecipeDetails
-            name={drinkName}
-            image={drinkImg}
-            recipe={drinkRecipe}
+            name={drinkName || randomDrink.strDrink}
+            image={drinkImg || randomDrink.strDrinkThumb}
+            recipe={drinkRecipe || randomDrink.strInstructions}
           />
         )}
       </main>
