@@ -49,8 +49,6 @@ export default function Home() {
         <title>Nightcapp</title>
         <link href="Home.module.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat&display=swap"
-        rel="stylesheet" />
         <link
           href="https://fonts.googleapis.com/css?family=Vibur:400"
           rel="stylesheet"
