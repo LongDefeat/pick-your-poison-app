@@ -72,6 +72,11 @@
   margin-right: 6px;
 }
 
+#sorry {
+  font-family: 'League Spartan', sans-serif;
+  color: #c1b4cf;
+}
+
 #p {
   display: flex;
   flex-direction: column;
