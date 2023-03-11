@@ -37,6 +37,17 @@
 
 #h3,
 #p {
+  font-family: 'League Spartan', sans-serif;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: #fff;
+}
+
+}
+
+#h3,
+#p {
   display: flex;
   align-content: center;
   justify-content: center;
