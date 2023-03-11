@@ -7,6 +7,7 @@ function About() {
   return (
     <>
       <Head>
+      <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet" />
         <link
           href="https://fonts.googleapis.com/css?family=Vibur:400"
           rel="stylesheet"
