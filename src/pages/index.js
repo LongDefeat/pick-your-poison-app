@@ -13,6 +13,7 @@ export default function Home() {
   const [drinkName, setDrinkName] = useState("");
   const [drinkImg, setDrinkImg] = useState("");
   const [drinkRecipe, setDrinkRecipe] = useState("");
+  const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,10 +21,11 @@ export default function Home() {
 
   const [randomDrink, setRandomDrink] = useState({});
 
-  const setDrinkInfo = (name, img, recipe) => {
+  const setDrinkInfo = (name, img, recipe, ingredients) => {
     setDrinkName(name);
     setDrinkImg(img);
     setDrinkRecipe(recipe);
+    setDrinkIngredients(ingredients);
   };
 
   const handleSubmit = async (event) => {
@@ -36,7 +38,20 @@ export default function Home() {
 
   const handleShowDrinkRecipe = (result) => {
     setShowDrinkRecipe(true);
-    setDrinkInfo(result.strDrink, result.strDrinkThumb, result.strInstructions);
+    setDrinkInfo(
+      result.strDrink, 
+      result.strDrinkThumb, 
+      result.strInstructions,
+      handleParseDrinkIngredients(result)
+      );
+  };
+
+  // This function parses the drink ingredients and returns them in an array.
+  const handleParseDrinkIngredients = (result) => {
+      const ingredientKeys = Object.keys(result).filter((key) => key.includes("Ingredient"));
+      const ingredientsList = ingredientKeys.map((key) => result[key]);
+      const nonNullValues = ingredientsList.filter((value) => value !== null);
+      return nonNullValues;
   };
 
   const handleChange = (e) => {
@@ -106,7 +121,7 @@ export default function Home() {
         )}
 
         {!showDrinkRecipe && !results.drinks && showCocktails === true && (
-          <div>Sorry! No cocktails found. Try another search!</div>
+          <div id={styles.sorry}>Sorry! No cocktails found. Try another search!</div>
         )}
 
         {showDrinkRecipe && (
@@ -114,6 +129,7 @@ export default function Home() {
             name={drinkName || randomDrink.strDrink}
             image={drinkImg || randomDrink.strDrinkThumb}
             recipe={drinkRecipe || randomDrink.strInstructions}
+            ingredients={drinkIngredients}
           />
         )}
       </main>
