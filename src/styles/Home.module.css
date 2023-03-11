@@ -51,17 +51,22 @@
 }
 
 .btn {
-  background-color: #d793bb;
-  color: #ecefe2;
-  font-size: 15px;
   padding: 12px 24px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  background-color: #d793bb;
+  transition: all 0.2s;
 }
 
 .btn:hover {
-  background-color: #8f88e6;
+  color: #8f88e6;
+  background-color: white;
 }
 
 #p {
