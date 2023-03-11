@@ -6,6 +6,8 @@ import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDice } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [drinkName, setDrinkName] = useState("");
@@ -82,6 +84,7 @@ export default function Home() {
                 setShowDrinkRecipe(true);
               }}
             >
+            <FontAwesomeIcon id={styles.dice} icon={faDice} />
             Random
             </button>
           </form>
