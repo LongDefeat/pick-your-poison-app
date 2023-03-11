@@ -43,7 +43,7 @@
 .recipeInstructions {
   display: flex;
   line-height: 20px;
-  padding: 10px;
+  padding: 14px;
   font-size: 16px;
   margin-top: 10px;
 }
