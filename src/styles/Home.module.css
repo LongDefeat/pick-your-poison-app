@@ -68,6 +68,10 @@
   background-color: white;
 }
 
+#dice {
+  margin-right: 6px;
+}
+
 #p {
   display: flex;
   flex-direction: column;
