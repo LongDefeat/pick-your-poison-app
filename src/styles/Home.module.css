@@ -61,6 +61,7 @@
   color: white;
   text-align: center;
   background-color: #d793bb;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
