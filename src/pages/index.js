@@ -20,7 +20,6 @@ export default function Home() {
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
-
   const [randomDrink, setRandomDrink] = useState({});
 
   const setDrinkInfo = (name, img, recipe, ingredients) => {
@@ -47,6 +46,14 @@ export default function Home() {
       handleParseDrinkIngredients(result)
       );
   };
+  
+  // Added this so that the ingredients show on random cocktails
+  const handleShowRandomCocktailRecipe = async (event) => {
+    event.preventDefault();
+    const data = await randomCocktail();
+    setRandomDrink(data.recipe);
+    handleShowDrinkRecipe(randomDrink);
+  }
 
   // This function parses the drink ingredients and returns them in an array.
   const handleParseDrinkIngredients = (result) => {
@@ -88,11 +95,9 @@ export default function Home() {
             </button>
             <button
               className={styles.btn}
-              onClick={async () => {
-                const data = await randomCocktail();
-                setRandomDrink(data.recipe);
-                setShowDrinkRecipe(true);
-              }}
+              onClick={
+                handleShowRandomCocktailRecipe
+              }
             >
             <FontAwesomeIcon id={styles.dice} icon={faDice} />
             Random
@@ -123,9 +128,9 @@ export default function Home() {
 
         {showDrinkRecipe && (
           <RecipeDetails
-            name={drinkName || randomDrink.strDrink}
-            image={drinkImg || randomDrink.strDrinkThumb}
-            recipe={drinkRecipe || randomDrink.strInstructions}
+            name={drinkName}
+            image={drinkImg}
+            recipe={drinkRecipe}
             ingredients={drinkIngredients}
           />
         )}
