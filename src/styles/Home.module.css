@@ -8,10 +8,8 @@
 }
 
 #h1 {
-  margin-top: 2rem;
-  margin-left: 9rem;
-  margin-right: 8rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -51,21 +49,29 @@
 }
 
 .btn {
-  background-color: #d793bb;
-  color: #ecefe2;
+  padding: 12px 24px;
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "League Spartan", sans-serif;
   font-size: 15px;
-  padding: 12px 14px;
-  border-radius: 10px;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  background-color: #d793bb;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s;
 }
 
 .btn:hover {
-  background-color: #8f88e6;
+  color: #8f88e6;
+  background-color: white;
 }
 
 #p {
   display: flex;
+  flex-direction: column;
+  font-family: "League Spartan", sans-serif;
   justify-content: center;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -74,12 +80,16 @@
   color: #c1b4cf;
 }
 
+#welcome {
+  color: #fff;
+}
+
 #form {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  max-width: 400px;
+  justify-content: center;
+  max-width: 800px;
   margin: 0 auto;
 }
 

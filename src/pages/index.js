@@ -45,8 +45,10 @@ export default function Home() {
     <div>
       <Head>
         <title>Nightcapp</title>
-        <link rel="icon" href="/favicon.ico" />
         <link href="Home.module.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat&display=swap"
+        rel="stylesheet" />
         <link
           href="https://fonts.googleapis.com/css?family=Vibur:400"
           rel="stylesheet"
@@ -57,8 +59,9 @@ export default function Home() {
         <Navigation />
         <h1 id={styles.h1}>Nightcapp</h1>
         <p id={styles.p}>
-          Welcome to Nightcapp. Get started by searching for your favorite
-          cocktail or browsing our collection.
+          <span id={styles.welcome}>Welcome to Nightcapp.</span>
+          <span>Get started by searching for your favorite
+          cocktail or browsing our collection.</span>
         </p>
         <div id={styles.form}>
           <form onSubmit={handleSubmit}>
@@ -79,7 +82,7 @@ export default function Home() {
                 setShowDrinkRecipe(true);
               }}
             >
-              Random
+            Random
             </button>
           </form>
         </div>
@@ -100,6 +103,7 @@ export default function Home() {
             </div>
           </ul>
         )}
+
         {!showDrinkRecipe && !results.drinks && showCocktails === true && (
           <div>Sorry! No cocktails found. Try another search!</div>
         )}
