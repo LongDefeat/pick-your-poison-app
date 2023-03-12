@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDice } from "@fortawesome/free-solid-svg-icons";
+import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import randomCocktail from "./api/randomCocktail";
-import styles from "../styles/Home.module.css";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDice } from "@fortawesome/free-solid-svg-icons";
+import HomepageIntro from "../components/HomepageIntro";
+
 
 export default function Home() {
   const [drinkName, setDrinkName] = useState("");
@@ -72,12 +74,7 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <Navigation />
-        <h1 id={styles.h1}>Nightcapp</h1>
-        <p id={styles.p}>
-          <span id={styles.welcome}>Welcome to Nightcapp.</span>
-          <span>Get started by searching for your favorite
-          cocktail or browsing our collection.</span>
-        </p>
+        <HomepageIntro />
         <div id={styles.form}>
           <form onSubmit={handleSubmit}>
             <input
