@@ -54,7 +54,7 @@
   background-color: #d793bb;
   color: #ecefe2;
   font-size: 15px;
-  padding: 12px 24px;
+  padding: 12px 14px;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -77,6 +77,7 @@
 #form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   max-width: 400px;
   margin: 0 auto;
