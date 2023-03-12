@@ -20,7 +20,6 @@ export default function Home() {
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
-  const [randomDrink, setRandomDrink] = useState({});
 
   const setDrinkInfo = (name, img, recipe, ingredients) => {
     setDrinkName(name);
@@ -48,11 +47,9 @@ export default function Home() {
   };
   
   // Added this so that the ingredients show on random cocktails
-  const handleShowRandomCocktailRecipe = async (event) => {
-    event.preventDefault();
+  const handleShowRandomCocktailRecipe = async () => {
     const data = await randomCocktail();
-    setRandomDrink(data.recipe);
-    handleShowDrinkRecipe(randomDrink);
+    handleShowDrinkRecipe(data.recipe);
   }
 
   // This function parses the drink ingredients and returns them in an array.
