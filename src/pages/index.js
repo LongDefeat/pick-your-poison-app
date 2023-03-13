@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDice } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
@@ -9,7 +7,7 @@ import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
 import HomepageIntro from "../components/HomepageIntro";
-
+import SearchForm from "../components/SearchForm";
 
 export default function Home() {
   const [drinkName, setDrinkName] = useState("");
@@ -37,13 +35,13 @@ export default function Home() {
   };
 
   const handleShowDrinkRecipe = (result) => {
-    setShowDrinkRecipe(true);
     setDrinkInfo(
       result.strDrink, 
       result.strDrinkThumb, 
       result.strInstructions,
       handleParseDrinkIngredients(result)
-      );
+    );
+    setShowDrinkRecipe(true);
   };
   
   // Added this so that the ingredients show on random cocktails
@@ -79,28 +77,12 @@ export default function Home() {
       <main className={styles.container}>
         <Navigation />
         <HomepageIntro />
-        <div id={styles.form}>
-          <form onSubmit={handleSubmit}>
-            <input
-              id={styles.input}
-              type="text"
-              value={searchTerm}
-              onChange={handleChange}
-            />
-            <button className={styles.btn} type="submit">
-              Search
-            </button>
-            <button
-              className={styles.btn}
-              onClick={
-                handleShowRandomCocktailRecipe
-              }
-            >
-            <FontAwesomeIcon id={styles.dice} icon={faDice} />
-            Random
-            </button>
-          </form>
-        </div>
+        <SearchForm 
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
+          searchTerm = {searchTerm}
+        />
         {!showDrinkRecipe && results.drinks && (
           <ul id={styles.ul}>
             <div id={styles.row}>
