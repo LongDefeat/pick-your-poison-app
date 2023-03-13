@@ -9,7 +9,18 @@
   display: inline-block;
   color: #ecefe2;
   background-color: #1c1123;
+  animation: jump .5s ease-in-out;
   border: 2px solid #8495ca;
+}
+
+@keyframes jump {
+  0% {
+  }
+  50% {
+    box-shadow: 0 8px 16px 0 #D793BB;
+  }
+  100% {
+  }
 }
 
 .cardContainer:hover {
