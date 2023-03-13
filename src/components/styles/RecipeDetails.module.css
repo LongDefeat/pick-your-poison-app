@@ -134,6 +134,8 @@
 #ingredientsTitle {
   font-size: 1.5rem;
   margin-top: 2rem;
+  text-decoration: underline;
+  text-decoration-color: #D793BB;
 }
 
 @media (max-width: 600px) {
@@ -151,6 +153,8 @@
 #directionsTitle {
   font-size: 1.5rem;
   margin-top: 2rem;
+  text-decoration: underline;
+  text-decoration-color: #be709e;
 }
 
 @media (max-width: 600px) {
