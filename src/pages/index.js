@@ -3,11 +3,11 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import randomCocktail from "./api/randomCocktail";
-import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
 import HomepageIntro from "../components/HomepageIntro";
 import SearchForm from "../components/SearchForm";
+import DrinksList from "../components/DrinksList";
 
 export default function Home() {
   const [drinkName, setDrinkName] = useState("");
@@ -84,21 +84,10 @@ export default function Home() {
           searchTerm = {searchTerm}
         />
         {!showDrinkRecipe && results.drinks && (
-          <ul id={styles.ul}>
-            <div id={styles.row}>
-              {results.drinks.map((result) => (
-                <div onClick={() => handleShowDrinkRecipe(result)}>
-                  <RecipeCard
-                    key={result.idDrink}
-                    id={result.idDrink}
-                    name={result.strDrink}
-                    image={result.strDrinkThumb}
-                    recipe={result.strInstructions}
-                  />
-                </div>
-              ))}
-            </div>
-          </ul>
+          <DrinksList 
+          results={results}
+          handleShowDrinkRecipe={handleShowDrinkRecipe}
+          />
         )}
 
         {!showDrinkRecipe && !results.drinks && showCocktails === true && (
@@ -116,4 +105,4 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
