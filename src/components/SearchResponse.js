@@ -1,4 +1,4 @@
-function SearchResponse(props) {
+export default function SearchResponse(props) {
   if (props.drinks) {
     const cocktails = props.drinks;
     const listCocktails = cocktails.map((drink) => {
@@ -11,5 +11,3 @@ function SearchResponse(props) {
     );
   }
 }
-
-export default SearchResponse;

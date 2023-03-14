@@ -3,7 +3,6 @@ import styles from "./styles/DrinksList.module.css";
 import RecipeCard from "./RecipeCard";
 
 export default function DrinksList(props) {
-
   return (
     <ul id={styles.ul}>
         <div id={styles.row}>

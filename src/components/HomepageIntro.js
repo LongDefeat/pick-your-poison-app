@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles/HomepageIntro.module.css";
 
-function HomepageIntro() {
+export default function HomepageIntro() {
   return (
     <>
         <h1 id={styles.h1}>Nightcapp</h1>
@@ -15,6 +15,3 @@ function HomepageIntro() {
     </>
   );
 }
-
-export default HomepageIntro;
-
