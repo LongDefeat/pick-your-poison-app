@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./styles/RecipeCard.module.css";
 
-
-function RecipeCard({name, image, recipe }) {
+export default function RecipeCard({name, image, recipe}) {
   return (
       <div className={styles.container}>
         <div className={styles.cardContainer}>
@@ -15,5 +14,3 @@ function RecipeCard({name, image, recipe }) {
       </div>
   );
 }
-
-export default RecipeCard;
