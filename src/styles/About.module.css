@@ -35,8 +35,38 @@
   }
 }
 
-#h3,
+#names {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.65rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: #fff;
+}
+
+#mason {
+  color:#D793BB;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#devin {
+  color: #8495ca;
+  padding-left: 5px;
+}
+
+#h3{
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.75rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: #fff;
+}
+
 #p {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.25rem;
   display: flex;
   align-content: center;
   justify-content: center;

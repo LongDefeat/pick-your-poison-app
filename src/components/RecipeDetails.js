@@ -8,7 +8,18 @@ export default function RecipeDetails(props) {
         <img className={styles.img} src={props.image}></img>
         <div id={styles.description}>
             <h1 id={styles.drinkTitle}>{props.name}</h1>
-            <p id={styles.drinkDescription}>{props.recipe}</p>
+            <h3 id={styles.ingredientsTitle}>Ingredients</h3>
+            <ul>
+              <div>
+                {props.ingredients.map((ingredient) => (
+                  <li id={styles.ingredient}>
+                    {ingredient}
+                  </li>
+                ))}
+            </div>
+          </ul>
+          <h3 id={styles.directionsTitle}>Directions</h3>
+          <p id={styles.drinkDescription}>{props.recipe}</p>
         </div>
       </div>
     </>

@@ -1,27 +1,29 @@
 import { useState } from "react";
+import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import randomCocktail from "./api/randomCocktail";
-import styles from "../styles/Home.module.css";
-import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
+import HomepageIntro from "../components/HomepageIntro";
+import SearchForm from "../components/SearchForm";
+import DrinksList from "../components/DrinksList";
 
 export default function Home() {
   const [drinkName, setDrinkName] = useState("");
   const [drinkImg, setDrinkImg] = useState("");
   const [drinkRecipe, setDrinkRecipe] = useState("");
+  const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
 
-  const [randomDrink, setRandomDrink] = useState({});
-
-  const setDrinkInfo = (name, img, recipe) => {
+  const setDrinkInfo = (name, img, recipe, ingredients) => {
     setDrinkName(name);
     setDrinkImg(img);
     setDrinkRecipe(recipe);
+    setDrinkIngredients(ingredients);
   };
 
   const handleSubmit = async (event) => {
@@ -33,8 +35,27 @@ export default function Home() {
   };
 
   const handleShowDrinkRecipe = (result) => {
+    setDrinkInfo(
+      result.strDrink, 
+      result.strDrinkThumb, 
+      result.strInstructions,
+      handleParseDrinkIngredients(result)
+    );
     setShowDrinkRecipe(true);
-    setDrinkInfo(result.strDrink, result.strDrinkThumb, result.strInstructions);
+  };
+  
+  // Added this so that the ingredients show on random cocktails
+  const handleShowRandomCocktailRecipe = async () => {
+    const data = await randomCocktail();
+    handleShowDrinkRecipe(data.recipe);
+  }
+
+  // This function parses the drink ingredients and returns them in an array.
+  const handleParseDrinkIngredients = (result) => {
+      const ingredientKeys = Object.keys(result).filter((key) => key.includes("Ingredient"));
+      const ingredientsList = ingredientKeys.map((key) => result[key]);
+      const nonNullValues = ingredientsList.filter((value) => value !== null);
+      return nonNullValues;
   };
 
   const handleChange = (e) => {
@@ -47,8 +68,6 @@ export default function Home() {
         <title>Nightcapp</title>
         <link href="Home.module.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat&display=swap"
-        rel="stylesheet" />
         <link
           href="https://fonts.googleapis.com/css?family=Vibur:400"
           rel="stylesheet"
@@ -57,65 +76,33 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <Navigation />
-        <h1 id={styles.h1}>Nightcapp</h1>
-        <p id={styles.p}>
-          <span id={styles.welcome}>Welcome to Nightcapp.</span>
-          <span>Get started by searching for your favorite
-          cocktail or browsing our collection.</span>
-        </p>
-        <div id={styles.form}>
-          <form onSubmit={handleSubmit}>
-            <input
-              id={styles.input}
-              type="text"
-              value={searchTerm}
-              onChange={handleChange}
-            />
-            <button className={styles.btn} type="submit">
-              Search
-            </button>
-            <button
-              className={styles.btn}
-              onClick={async () => {
-                const data = await randomCocktail();
-                setRandomDrink(data.recipe);
-                setShowDrinkRecipe(true);
-              }}
-            >
-            Random
-            </button>
-          </form>
-        </div>
+        <HomepageIntro />
+        <SearchForm 
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
+          searchTerm = {searchTerm}
+        />
         {!showDrinkRecipe && results.drinks && (
-          <ul id={styles.ul}>
-            <div id={styles.row}>
-              {results.drinks.map((result) => (
-                <div onClick={() => handleShowDrinkRecipe(result)}>
-                  <RecipeCard
-                    key={result.idDrink}
-                    id={result.idDrink}
-                    name={result.strDrink}
-                    image={result.strDrinkThumb}
-                    recipe={result.strInstructions}
-                  />
-                </div>
-              ))}
-            </div>
-          </ul>
+          <DrinksList 
+          results={results}
+          handleShowDrinkRecipe={handleShowDrinkRecipe}
+          />
         )}
 
         {!showDrinkRecipe && !results.drinks && showCocktails === true && (
-          <div>Sorry! No cocktails found. Try another search!</div>
+          <div id={styles.sorry}>Sorry! No cocktails found. Try another search!</div>
         )}
 
         {showDrinkRecipe && (
           <RecipeDetails
-            name={drinkName || randomDrink.strDrink}
-            image={drinkImg || randomDrink.strDrinkThumb}
-            recipe={drinkRecipe || randomDrink.strInstructions}
+            name={drinkName}
+            image={drinkImg}
+            recipe={drinkRecipe}
+            ingredients={drinkIngredients}
           />
         )}
       </main>
     </div>
   );
-}
+};
