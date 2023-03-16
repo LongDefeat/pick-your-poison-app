@@ -10,7 +10,9 @@ function matchIngredientsWithMeasurements(cocktailData) {
     if (cocktailData[`strIngredient${i}`]) {
       ingredient.name = cocktailData[`strIngredient${i}`];
     }
-    ingredients.push(ingredient);
+    if (Object.keys(ingredient).length) {
+      ingredients.push(ingredient);
+    }
   }
   return ingredients;
 }
@@ -21,12 +23,16 @@ async function searchCocktail(data) {
       method: "get",
       url: `http://localhost:3001/cocktaildb/search/?recipe=${data}`,
     });
-    debugger;
-    const cocktailData = response.data;
+    const {
+      drinks
+    } = response.data;
     const cocktails = [];
-    for (const cocktail of cocktailData) {
+    for (const cocktail of drinks) {
       const ingredientsList = matchIngredientsWithMeasurements(cocktail);
-      cocktails.push({ ...cocktail, ingredientsList });
+      cocktails.push({
+        ...cocktail,
+        ingredientsList
+      });
     }
 
     return cocktails;
