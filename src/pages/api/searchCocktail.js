@@ -1,29 +1,35 @@
 import axios from "axios";
 
-function getIngredients(cocktailData) {
+function matchIngredientsWithMeasurements(cocktailData) {
   const ingredients = [];
   for (let i = 1; i <= 15; i++) {
-    if (cocktailData[`strIngredient${i}`]) {
-      ingredients.push(`
-        <li>${cocktailData[`strIngredient${i}`]} - ${
-        cocktailData[`strMeasure${i}`]
-      }</li>
-      `);
+    const ingredient = {};
+    if (cocktailData[`strMeasure${i}`]) {
+      ingredient.measurement = cocktailData[`strMeasure${i}`];
     }
+    if (cocktailData[`strIngredient${i}`]) {
+      ingredient.name = cocktailData[`strIngredient${i}`];
+    }
+    ingredients.push(ingredient);
   }
-  console.log(ingredients.join(""));
-  return ingredients.join("");
+  return ingredients;
 }
 
 async function searchCocktail(data) {
   try {
-    const response = axios({
+    const response = await axios({
       method: "get",
       url: `http://localhost:3001/cocktaildb/search/?recipe=${data}`,
     });
+    debugger;
     const cocktailData = response.data;
-    // const ingredientsList = getIngredients(cocktailData);
-    return (await response).data;
+    const cocktails = [];
+    for (const cocktail of cocktailData) {
+      const ingredientsList = matchIngredientsWithMeasurements(cocktail);
+      cocktails.push({ ...cocktail, ingredientsList });
+    }
+
+    return cocktails;
   } catch (error) {
     console.error(error);
   }
