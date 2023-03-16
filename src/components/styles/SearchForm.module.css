@@ -29,7 +29,8 @@
 }
   
 #dice {
-    margin-right: 6px;
+    width: 16px;
+    margin-right: 5px;
 }
 
 #input,
