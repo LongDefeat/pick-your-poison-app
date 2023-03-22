@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function matchIngredientsWithMeasurements(cocktailData) {
+export function matchIngredientsWithMeasurements(cocktailData) {
   const ingredients = [];
   for (let i = 1; i <= 15; i++) {
     const ingredient = {};
