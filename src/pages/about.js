@@ -16,7 +16,7 @@ export default function About() {
       </Head>
       <Navigation />
       <div className={styles.container}>
-        <h1 id={styles.h1}>About our app</h1>
+        <h1 id={styles.h1}>About Nightcapp</h1>
         <h3 id={styles.h3}>Welcome to our cocktail database!</h3>
         <p id={styles.names}>We're 
           <span id={styles.mason}>Mason</span> 
