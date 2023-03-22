@@ -17,15 +17,17 @@ export default function About() {
       <Navigation />
       <div className={styles.container}>
         <h1 id={styles.h1}>About Nightcapp</h1>
-        <h3 id={styles.h3}>Welcome to our cocktail database!</h3>
-        <p id={styles.names}>We're 
-          <span id={styles.mason}>Mason</span> 
-          and 
-          <span id={styles.devin}>Devin</span>.</p>
-        <p id={styles.p}>
-          We started this website to encourage the art of cocktail making and
-          inspire others to partake and make new creations at their home bar!
-        </p>
+        <section id={styles.about}>
+          <p id={styles.names}>
+            We're 
+            <span id={styles.mason}>Mason</span> 
+            and 
+            <span id={styles.devin}>Devin</span>.</p>
+          <p id={styles.p}>
+            Welcome to our cocktail database! We started this website to encourage the art of cocktail making and
+            inspire others to partake and make new creations at their home bar!
+          </p>
+        </section>
       </div>
     </>
   );
