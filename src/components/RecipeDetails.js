@@ -1,13 +1,19 @@
 import React from "react";
+import { matchIngredientsWithMeasurements } from "../pages/api/searchCocktail";
 import styles from "./styles/RecipeDetails.module.css";
 
 export default function RecipeDetails({ drink }) {
-    const {
+    let {
         strDrink: name,
         strDrinkThumb: image,
         strInstructions: recipe,
         ingredientsList,
     } = drink;
+
+    // Added this so that we can get ingredients and measurements to display for random cocktails.
+    if (!drink.ingredientsList) {
+        ingredientsList = matchIngredientsWithMeasurements(drink);
+    }
 
     return (
         <>
@@ -18,7 +24,7 @@ export default function RecipeDetails({ drink }) {
                     <h3 id={styles.ingredientsTitle}>Ingredients</h3>
                     <ul>
                         <div>
-                            {ingredientsList.map((ingredient) => (
+                            {ingredientsList && ingredientsList.map((ingredient) => (
                                 <li id={styles.ingredient}>
                                     {ingredient.name} - {ingredient.measurement}
                                 </li>
