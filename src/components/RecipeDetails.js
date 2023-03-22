@@ -26,7 +26,7 @@ export default function RecipeDetails({ drink }) {
                         <div>
                             {ingredientsList && ingredientsList.map((ingredient) => (
                                 <li id={styles.ingredient}>
-                                    {ingredient.name} - {ingredient.measurement}
+                                    {ingredient.name} - <span id={styles.measurements}>{ingredient.measurement}</span>
                                 </li>
                             ))}
                         </div>
