@@ -72,7 +72,7 @@ export default function Home() {
                     />
                 )}
                 {!showDrinkRecipe &&
-                    !results.drinks &&
+                    !results &&
                     showCocktails === true && (
                         <div id={styles.sorry}>
                             Sorry!No cocktails found.Try another search!
