@@ -30,7 +30,6 @@ export default function Home() {
         setShowDrinkRecipe(true);
     };
 
-    // Added this so that the ingredients show on random cocktails
     const handleShowRandomCocktailRecipe = async () => {
         const data = await randomCocktail();
         handleShowDrinkRecipe(data.recipe);
