@@ -44,29 +44,32 @@
   color: #fff;
 }
 
+#about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem 2rem;
+  flex-direction: column;
+}
+
 #mason {
   color:#D793BB;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 #devin {
   color: #8495ca;
-  padding-left: 5px;
-}
-
-#h3{
-  font-family: 'League Spartan', sans-serif;
-  font-size: 1.75rem;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  color: #fff;
+  padding-left: 6px;
 }
 
 #p {
   font-family: 'League Spartan', sans-serif;
   font-size: 1.25rem;
+  line-height: 25px;
   display: flex;
   align-content: center;
   justify-content: center;
