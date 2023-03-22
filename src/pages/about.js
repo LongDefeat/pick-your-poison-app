@@ -25,7 +25,7 @@ export default function About() {
             <span id={styles.devin}>Devin</span>.</p>
           <p id={styles.p}>
             Welcome to our cocktail database! We started this website to encourage the art of cocktail making and
-            inspire others to partake and make new creations at their home bar!
+            to inspire others to partake and make new creations at their home bar!
           </p>
         </section>
       </div>
