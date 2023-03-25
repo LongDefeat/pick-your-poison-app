@@ -8,8 +8,8 @@ export default function HomepageIntro() {
         <p id={styles.p}>
             <span id={styles.welcome}>Welcome to Nightcapp.</span>
             <span>
-                Get started by searching for your favorite
-                cocktail or browsing our collection.
+                Search for your favorite
+                cocktail or browse our collection.
             </span>
         </p>
     </>

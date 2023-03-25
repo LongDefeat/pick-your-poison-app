@@ -150,6 +150,10 @@
   margin-bottom: .25rem;
 }
 
+#measurements {
+  color: #e4a5ca;
+}
+
 #directionsTitle {
   font-size: 1.5rem;
   margin-top: 2rem;

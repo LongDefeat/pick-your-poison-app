@@ -8,6 +8,7 @@ import Navigation from "../components/routes-nav/Navigation";
 import HomepageIntro from "../components/HomepageIntro";
 import SearchForm from "../components/SearchForm";
 import DrinksList from "../components/DrinksList";
+import Alert from "../components/Alert";
 
 export default function Home() {
     const [drinkInfo, setDrinkInfo] = useState();
@@ -26,7 +27,7 @@ export default function Home() {
     };
 
     const handleShowDrinkRecipe = (result) => {
-        setDrinkInfo(result);
+        setDrinkInfo(result); 
         setShowDrinkRecipe(true);
     };
 
@@ -72,11 +73,9 @@ export default function Home() {
                     />
                 )}
                 {!showDrinkRecipe &&
-                    !results.drinks &&
+                    !results &&
                     showCocktails === true && (
-                        <div id={styles.sorry}>
-                            Sorry!No cocktails found.Try another search!
-                        </div>
+                        <Alert />
                     )}
                 {showDrinkRecipe && <RecipeDetails drink={drinkInfo} />}{" "}
             </main>{" "}

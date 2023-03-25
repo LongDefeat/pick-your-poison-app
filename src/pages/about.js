@@ -13,19 +13,27 @@ export default function About() {
           rel="stylesheet"
           type="text/css"
         ></link>
+        <title>About Nightcapp</title>
       </Head>
       <Navigation />
       <div className={styles.container}>
-        <h1 id={styles.h1}>About our app</h1>
-        <h3 id={styles.h3}>Welcome to our cocktail database!</h3>
-        <p id={styles.names}>We're 
-          <span id={styles.mason}>Mason</span> 
-          and 
-          <span id={styles.devin}>Devin</span>.</p>
-        <p id={styles.p}>
-          We started this website to encourage the art of cocktail making and
-          inspire others to partake and make new creations at their home bar!
-        </p>
+        <h1 id={styles.h1}>About Nightcapp</h1>
+        <section id={styles.about}>         
+          <p id={styles.names}>
+            We're 
+            <span id={styles.mason}>Mason</span> 
+            and 
+            <span id={styles.devin}>Devin</span>.
+          </p>
+          <p id={styles.p}>
+            Welcome to Nightcapp, our cocktail database. Our passion for mixology inspired us to
+            build this website and share our love of cocktails with others. Our web app
+            offers a wide range of drink recipes, from classic cocktails to creative new
+            concoctions. Whether you're a seasoned bartender or just starting to explore
+            the world of mixology, we hope Nightcapp will become your go-to source for
+            cocktail inspiration. Cheers!
+          </p>
+        </section>
       </div>
     </>
   );
