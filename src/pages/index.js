@@ -11,6 +11,9 @@ import DrinksList from "../components/DrinksList";
 import Alert from "../components/Alert";
 
 export default function Home() {
+    // Added this first useState() hook in order to fix the bug where when users click the
+    // "random" button the drinkslist briefly flashes.
+    const [isRandom, setIsRandom] = useState(false);
     const [drinkInfo, setDrinkInfo] = useState();
     const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
     const [showCocktails, setShowCocktails] = useState(false);
@@ -33,7 +36,14 @@ export default function Home() {
 
     const handleShowRandomCocktailRecipe = async () => {
         const data = await randomCocktail();
+        setIsRandom(true);
         handleShowDrinkRecipe(data.recipe);
+    };
+
+    // Need to pass this to SearchForm in order to bring back search functionality
+    // after setting isRandom to true;
+    const handleSetIsRandomFalse = () => {
+        setIsRandom(false);
     };
 
     const handleChange = (e) => {
@@ -61,12 +71,13 @@ export default function Home() {
                 <SearchForm
                     handleSubmit={handleSubmit}
                     handleChange={handleChange}
+                    handleSetIsRandomFalse={handleSetIsRandomFalse}
                     handleShowRandomCocktailRecipe={
                         handleShowRandomCocktailRecipe
                     }
                     searchTerm={searchTerm}
                 />{" "}
-                {!showDrinkRecipe && results && (
+                {!showDrinkRecipe && results && !isRandom && (
                     <DrinksList
                         results={results}
                         handleShowDrinkRecipe={handleShowDrinkRecipe}
