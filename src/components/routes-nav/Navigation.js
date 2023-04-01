@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/Link";
 import styles from "../styles/Navigation.module.css";
 
-function Navigation() {
+function Navigation(props) {
   return (
     <div className={styles.nav}>
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <Link href="/">Home</Link>
+          <Link href="/" onClick={props.handleHideDrinksList}>Home</Link>
         </li>
         <li className={styles.navItem}>
           <Link href="/about" legacyBehavior>
