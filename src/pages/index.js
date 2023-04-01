@@ -22,6 +22,10 @@ export default function Home() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        // Prevents users from searching if the search field is empty
+        if (searchTerm.trim() === "") {
+            return;
+        }
         setShowDrinkRecipe(false);
         const data = await searchCocktail(searchTerm);
         setResults(data);
