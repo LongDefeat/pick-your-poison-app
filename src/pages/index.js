@@ -38,7 +38,11 @@ export default function Home() {
         setShowDrinkRecipe(true);
     };
 
-    const handleShowRandomCocktailRecipe = async () => {
+     const handleShowRandomCocktailRecipe = async () => {
+        // The two lines of code below this fix a bug where the DrinksList would flash
+        // in between searches.
+        setShowCocktails(false);
+        setResults([]);
         const data = await randomCocktail();
         setIsRandom(true);
         handleShowDrinkRecipe(data.recipe);
