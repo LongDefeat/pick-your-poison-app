@@ -12,9 +12,10 @@ import Alert from "../components/Alert";
 
 export default function Home() {
     // Added this first useState() hook in order to fix the bug where when users click the
-    // "random" button the drinkslist briefly flashes.
+    // "random" button the DrinksList briefly flashes.
     const [isRandom, setIsRandom] = useState(false);
     const [drinkInfo, setDrinkInfo] = useState();
+    const [hideDrinksList, setHideDrinksList] = useState(false);
     const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
     const [showCocktails, setShowCocktails] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -30,6 +31,7 @@ export default function Home() {
         const data = await searchCocktail(searchTerm);
         setResults(data);
         setSearchTerm("");
+        setHideDrinksList(false);
         setShowCocktails(true);
     };
 
@@ -38,7 +40,13 @@ export default function Home() {
         setShowDrinkRecipe(true);
     };
 
-     const handleShowRandomCocktailRecipe = async () => {
+    // Makes it so when a user clicks "Home" in the navbar after searching it hides
+    // the drinks list
+    const handleHideDrinksList = () => {
+        setHideDrinksList(true);
+    }
+
+    const handleShowRandomCocktailRecipe = async () => {
         // The two lines of code below this fix a bug where the DrinksList would flash
         // in between searches.
         setShowCocktails(false);
@@ -74,7 +82,9 @@ export default function Home() {
                 ></link>{" "}
             </Head>{" "}
             <main className={styles.container}>
-                <Navigation />
+                <Navigation 
+                    handleHideDrinksList={handleHideDrinksList}
+                />
                 <HomepageIntro />
                 <SearchForm
                     handleSubmit={handleSubmit}
@@ -85,7 +95,7 @@ export default function Home() {
                     }
                     searchTerm={searchTerm}
                 />{" "}
-                {!showDrinkRecipe && results && !isRandom && (
+                {!hideDrinksList && !showDrinkRecipe && results && !isRandom && (
                     <DrinksList
                         results={results}
                         handleShowDrinkRecipe={handleShowDrinkRecipe}
