@@ -1,0 +1,17 @@
+#h1 {
+  margin-top: 2rem;
+  margin-left: 9rem;
+  margin-right: 8rem;
+  margin-bottom: 1rem;
+  font-size: 10rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-family: "Vibur", sans-serif;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f09,
+    0 0 82px #f09, 0 0 92px #f09, 0 0 102px #f09, 0 0 151px #f09;
+  font-size: 6rem;
+  animation: pulsate 0.11s ease-in-out infinite alternate;
+}
