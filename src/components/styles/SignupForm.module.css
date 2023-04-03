@@ -1,0 +1,53 @@
+.signupIntro {
+  margin: 12px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-family: "Vibur", sans-serif;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f09,
+    0 0 82px #f09, 0 0 92px #f09, 0 0 102px #f09, 0 0 151px #f09;
+  font-size: 35px;
+  animation: pulsate 0.11s ease-in-out infinite alternate;
+}
+
+.signupForm {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signupForm h2 {
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+#label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input[type="text"],
+.input[type="password"],
+.input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+/* button[type="submit"] {
+  background-color: #0070f3;
+  color: #fff;
+} */

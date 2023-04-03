@@ -20,7 +20,6 @@ export default function About() {
         <title>Signup</title>
       </Head>
       <Navigation />
-      <h1>Sign up and join us today!</h1>
       <SignupForm />
     </>
   );

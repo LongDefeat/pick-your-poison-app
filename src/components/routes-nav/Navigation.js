@@ -3,7 +3,7 @@ import Link from "next/Link";
 import styles from "../styles/Navigation.module.css";
 import UserContext from "../auth/CurrentUserContext";
 
-function Navigation() {
+function Navigation(props) {
   // const { currentUser } = useContext(UserContext);
 
   function loggedInNav() {
