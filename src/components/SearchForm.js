@@ -13,7 +13,10 @@ export default function SearchForm(props) {
             value={props.searchTerm}
             onChange={props.handleChange}
             />
-            <button className={styles.btn} type="submit">
+            <button 
+            className={styles.btn} 
+            onClick={props.handleSetIsRandomFalse}
+            type="submit">
                 Search
             </button>
             <button

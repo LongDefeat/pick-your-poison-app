@@ -63,7 +63,9 @@ function Navigation() {
 
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <Link href="/">Home</Link>
+          <Link href="/" onClick={props.handleHideDrinksList}>
+            Home
+          </Link>
         </li>
         <li className={styles.navItem}>
           <Link href="/about" legacyBehavior>
