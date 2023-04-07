@@ -72,6 +72,12 @@ function Navigation(props) {
             About Us
           </Link>
         </li>
+        {/**will need to DELETE THIS ONCE CURRENT USER WORKS */}
+        <li className={styles.navItem}>
+          <Link href="/signup" legacyBehavior>
+            Sign Up
+          </Link>
+        </li>
       </ul>
     </div>
   );

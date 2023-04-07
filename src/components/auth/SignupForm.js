@@ -87,7 +87,11 @@ function SignupForm({ signup }) {
           </div>
 
           <div className={styles.formGroup}>
-            <button type="submit" onClick={(e) => signup(e, signupFormData)}>
+            <button
+              className={styles.btn}
+              type="submit"
+              onClick={(e) => signup(e, signupFormData)}
+            >
               Sign Up
             </button>
           </div>

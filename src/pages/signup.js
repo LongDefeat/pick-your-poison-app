@@ -4,7 +4,7 @@ import SignupForm from "../components/auth/SignupForm";
 import Navigation from "../components/routes-nav/Navigation";
 import styles from "../styles/Signup.module.css";
 
-export default function About() {
+export default function Signup() {
   return (
     <>
       <Head>
