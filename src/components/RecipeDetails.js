@@ -1,44 +1,31 @@
-import React from "react";
-import { matchIngredientsWithMeasurements } from "../pages/api/searchCocktail";
 import styles from "./styles/RecipeDetails.module.css";
 
-export default function RecipeDetails({ drink }) {
-  let {
-    strDrink: name,
-    strDrinkThumb: image,
-    strInstructions: recipe,
-    ingredientsList,
-  } = drink;
+export default function RecipeDetails(props) {
 
-  // Added this so that we can get ingredients and measurements to display for random cocktails.
-  if (!drink.ingredientsList) {
-    ingredientsList = matchIngredientsWithMeasurements(drink);
-  }
-
-  return (
-    <>
-      <div id={styles.body}>
-        <img className={styles.img} src={image}></img>
-        <div id={styles.description}>
-          <h1 id={styles.drinkTitle}>{name}</h1>
-          <h3 id={styles.ingredientsTitle}>Ingredients</h3>
-          <ul>
-            <div>
-              {ingredientsList &&
-                ingredientsList.map((ingredient) => (
-                  <li id={styles.ingredient}>
-                    <span id={styles.measurements}>
-                      {ingredient.measurement}
-                    </span>{" "}
-                    {ingredient.name}
-                  </li>
-                ))}
+    return (
+        <>
+            <div id={styles.body}>
+                <img 
+                    className={styles.img} 
+                    src={props.image}
+                >
+                </img>
+                <div id={styles.description}>
+                    <h1 id={styles.drinkTitle}>{props.name}</h1>
+                    <h3 id={styles.ingredientsTitle}>Ingredients</h3>
+                    <ul>
+                        <div>
+                            {props.ingredientsList && props.ingredientsList.map((ingredient) => (
+                                <li id={styles.ingredient}>
+                                    {ingredient.name} - <span id={styles.measurements}>{ingredient.measurement}</span>
+                                </li>
+                            ))}
+                        </div>
+                    </ul>
+                    <h3 id={styles.directionsTitle}>Directions</h3>
+                    <p id={styles.drinkDescription}>{props.instructions}</p>
+                </div>
             </div>
-          </ul>
-          <h3 id={styles.directionsTitle}>Directions</h3>
-          <p id={styles.drinkDescription}>{recipe}</p>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }

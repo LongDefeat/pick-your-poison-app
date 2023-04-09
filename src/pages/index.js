@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
@@ -17,11 +18,16 @@ export default function Home() {
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
+  const router = useRouter();
 
   const currentUser = useContext(CurrentUser);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Prevents users from searching if the search field is empty
+    if (searchTerm.trim() === "") {
+        return;
+    }
     setShowDrinkRecipe(false);
     const data = await searchCocktail(searchTerm);
     setResults(data);
@@ -32,6 +38,14 @@ export default function Home() {
   const handleShowDrinkRecipe = (result) => {
     setDrinkInfo(result);
     setShowDrinkRecipe(true);
+    
+    // Pushing variables through to page and setting the route
+    router.push({
+        pathname: `/drink/${result.idDrink}`,
+        query: { 
+            drink: JSON.stringify(result)
+        }
+     })
   };
 
   const handleShowRandomCocktailRecipe = async () => {
