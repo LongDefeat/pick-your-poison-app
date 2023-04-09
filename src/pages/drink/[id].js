@@ -1,11 +1,15 @@
+import { useState, useContext } from "react";
 import { useRouter } from 'next/router';
 import Head from "next/head";
+import searchCocktail from "../api/searchCocktail";
+import randomCocktail from "../api/randomCocktail";
 import { matchIngredientsWithMeasurements } from "../api/searchCocktail";
-import { handleSubmit, handleChange, handleShowRandomCocktailRecipe, searchTerm } from "../index";
 import HomepageIntro from "../../components/HomepageIntro";
 import SearchForm from "../../components/SearchForm";
 import Navigation from "../../components/routes-nav/Navigation";
 import RecipeDetails from "../../components/RecipeDetails";
+import DrinksList from "../../components/DrinksList";
+import Alert from "../../components/Alert";
 
 export default function DrinkPage() {
   const router = useRouter();
@@ -20,6 +24,47 @@ export default function DrinkPage() {
   const image = parsedCocktail.strDrinkThumb;
   const instructions = parsedCocktail.strInstructions;
   const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
+
+  const [drinkInfo, setDrinkInfo] = useState();
+  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
+  const [showCocktails, setShowCocktails] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Prevents users from searching if the search field is empty
+    if (searchTerm.trim() === "") {
+        return;
+    }
+    setShowDrinkRecipe(false);
+    const data = await searchCocktail(searchTerm);
+    setResults(data);
+    setSearchTerm("");
+    setShowCocktails(true);
+  };
+
+  const handleShowDrinkRecipe = (result) => {
+    setDrinkInfo(result);
+    setShowDrinkRecipe(true);
+    
+    // Pushing variables through to page and setting the route
+    router.push({
+        pathname: `/drink/${result.idDrink}`,
+        query: { 
+            drink: JSON.stringify(result)
+        }
+     })
+  };
+
+  const handleShowRandomCocktailRecipe = async () => {
+    const data = await randomCocktail();
+    handleShowDrinkRecipe(data.recipe);
+  };
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <div>
@@ -45,12 +90,21 @@ export default function DrinkPage() {
           handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
           searchTerm={searchTerm}
         />{" "}
-        <RecipeDetails 
-          name={name}
-          image={image}
-          instructions={instructions}
-          ingredientsList={ingredientsList}
-        />
+         {!showDrinkRecipe && results && (
+          <DrinksList
+            results={results}
+            handleShowDrinkRecipe={handleShowDrinkRecipe}
+          />
+        )}
+        {!showDrinkRecipe && !results && showCocktails === true && <Alert />}
+        {showDrinkRecipe &&
+          <RecipeDetails 
+            name={name}
+            image={image}
+            instructions={instructions}
+            ingredientsList={ingredientsList}
+          />
+        }{" "}
       </main>
     </div>
   )
