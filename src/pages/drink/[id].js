@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
 import Head from "next/head";
 import { matchIngredientsWithMeasurements } from "../api/searchCocktail";
+import { handleSubmit, handleChange, handleShowRandomCocktailRecipe, searchTerm } from "../index";
+import HomepageIntro from "../../components/HomepageIntro";
+import SearchForm from "../../components/SearchForm";
 import Navigation from "../../components/routes-nav/Navigation";
 import RecipeDetails from "../../components/RecipeDetails";
 
@@ -35,6 +38,13 @@ export default function DrinkPage() {
       </Head>
       <main>
         <Navigation />
+        <HomepageIntro />
+        <SearchForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
+          searchTerm={searchTerm}
+        />{" "}
         <RecipeDetails 
           name={name}
           image={image}
