@@ -1,5 +1,5 @@
 #body {
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
   color: white;
   display: flex;
   width: 40vw;
@@ -37,6 +37,37 @@
   margin-top: 1.75rem;
   animation: pulse 2s ease-in-out 1;
 }
+
+.icon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+/* .icon:hover::before {
+  content: "Add to favorites";
+  display: block;
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.icon:hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-bottom-color: #454444;
+} */
 
 @keyframes pulse {
   0% {
@@ -87,11 +118,7 @@
   box-shadow: 0px 8px 16px #8495ca;
 }
 .img {
-  background: linear-gradient(
-    to right,
-    #e44ca4,
-    #8495ca
-  );
+  background: linear-gradient(to right, #e44ca4, #8495ca);
   background-size: 200% auto;
   animation: gradient 8s ease infinite;
 }
@@ -135,7 +162,7 @@
   font-size: 1.5rem;
   margin-top: 2rem;
   text-decoration: underline;
-  text-decoration-color: #D793BB;
+  text-decoration-color: #d793bb;
 }
 
 @media (max-width: 600px) {
@@ -147,7 +174,7 @@
 #ingredient {
   font-size: 1.25rem;
   margin-left: 1rem;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 #measurements {
