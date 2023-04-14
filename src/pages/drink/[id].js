@@ -25,7 +25,6 @@ export default function DrinkPage() {
   const instructions = parsedCocktail.strInstructions;
   const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
 
-  const [drinkInfo, setDrinkInfo] = useState();
   const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,7 +44,6 @@ export default function DrinkPage() {
   };
 
   const handleShowDrinkRecipe = (result) => {
-    setDrinkInfo(result);
     setShowDrinkRecipe(true);
     
     // Pushing variables through to page and setting the route
