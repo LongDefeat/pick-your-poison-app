@@ -15,7 +15,6 @@ export default function SearchForm(props) {
             />
             <button 
             className={styles.btn} 
-            onClick={props.handleSetIsRandomFalse}
             type="submit">
                 Search
             </button>
