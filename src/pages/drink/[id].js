@@ -13,6 +13,9 @@ import Alert from "../../components/Alert";
 
 export default function DrinkPage() {
   const [isRandom, setIsRandom] = useState(true);
+  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
   const router = useRouter();
 
   const {
@@ -31,11 +34,6 @@ export default function DrinkPage() {
   const image = parsedCocktail.strDrinkThumb;
   const instructions = parsedCocktail.strInstructions;
   const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
-
-  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
-  const [showCocktails, setShowCocktails] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -60,10 +58,6 @@ export default function DrinkPage() {
         }
      })
   };
-
-  const handleSetIsRandomFalse = () => {
-    setIsRandom(false);
-  }
 
   const handleShowRandomCocktailRecipe = async () => {
     setIsRandom(true);
