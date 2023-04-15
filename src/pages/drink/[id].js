@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import Head from "next/head";
 import searchCocktail from "../api/searchCocktail";
@@ -12,11 +12,18 @@ import DrinksList from "../../components/DrinksList";
 import Alert from "../../components/Alert";
 
 export default function DrinkPage() {
+  const [isRandom, setIsRandom] = useState(true);
   const router = useRouter();
 
   const {
     query: {drink}
   } = router;
+
+  useEffect(() => {
+    if (isRandom) {
+      handleShowRandomCocktailRecipe();
+    }
+  }, [isRandom]);
 
   const parsedCocktail = JSON.parse(drink);
 
@@ -40,12 +47,11 @@ export default function DrinkPage() {
     const data = await searchCocktail(searchTerm);
     setResults(data);
     setSearchTerm("");
-    setShowCocktails(true);
   };
 
   const handleShowDrinkRecipe = (result) => {
     setShowDrinkRecipe(true);
-    
+    console.log(result);
     // Pushing variables through to page and setting the route
     router.push({
         pathname: `/drink/${result.idDrink}`,
@@ -55,7 +61,12 @@ export default function DrinkPage() {
      })
   };
 
+  const handleSetIsRandomFalse = () => {
+    setIsRandom(false);
+  }
+
   const handleShowRandomCocktailRecipe = async () => {
+    setIsRandom(true);
     const data = await randomCocktail();
     handleShowDrinkRecipe(data.recipe);
   };
