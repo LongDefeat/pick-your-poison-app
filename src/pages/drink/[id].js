@@ -91,7 +91,7 @@ export default function DrinkPage() {
             handleShowDrinkRecipe={handleShowDrinkRecipe}
           />
         )}
-        {!showDrinkRecipe && !results && showCocktails === true && <Alert />}
+        {!showDrinkRecipe && !results === true && <Alert />}
         {showDrinkRecipe &&
           <RecipeDetails 
             name={name}
