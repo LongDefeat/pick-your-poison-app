@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import Head from "next/head";
 import searchCocktail from "../api/searchCocktail";
@@ -21,12 +21,24 @@ export default function DrinkPage() {
     query: {drink}
   } = router;
 
-  const parsedCocktail = JSON.parse(drink);
+  // Set the parsedCocktail state when the component mounts
+  useEffect(() => {
+    if (drink) {
+      const parsedCocktail = JSON.parse(drink);
+      const name = parsedCocktail.strDrink;
+      const image = parsedCocktail.strDrinkThumb;
+      const instructions = parsedCocktail.strInstructions;
+      const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
 
-  const name = parsedCocktail.strDrink;
-  const image = parsedCocktail.strDrinkThumb;
-  const instructions = parsedCocktail.strInstructions;
-  const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
+      // Set the state to show the RecipeDetails component
+      setShowDrinkRecipe(true);
+      setResults([]);
+      setSearchTerm("");
+      setParsedCocktail({ name, image, instructions, ingredientsList });
+    }
+  }, [drink]);
+
+  const [parsedCocktail, setParsedCocktail] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,7 +54,7 @@ export default function DrinkPage() {
 
   const handleShowDrinkRecipe = (result) => {
     setShowDrinkRecipe(true);
-    console.log(result);
+    // console.log(result);
     // Pushing variables through to page and setting the route
     router.push({
         pathname: `/drink/${result.idDrink}`,
@@ -54,7 +66,16 @@ export default function DrinkPage() {
 
   const handleShowRandomCocktailRecipe = async () => {
     const data = await randomCocktail();
-    handleShowDrinkRecipe(data.recipe);
+    const parsedCocktail = {
+      name: data.recipe.strDrink,
+      image: data.recipe.strDrinkThumb,
+      instructions: data.recipe.strInstructions,
+      ingredientsList: matchIngredientsWithMeasurements(data.recipe)
+    };
+    setParsedCocktail(parsedCocktail);
+    setShowDrinkRecipe(true);
+    setResults([]);
+    setSearchTerm("");
   };
 
   const handleChange = (e) => {
@@ -65,7 +86,7 @@ export default function DrinkPage() {
     <div>
       <Head>
         <title> Nightcapp Cocktail Details </title>
-        <link href="Home.module.css" rel="stylesheet" />
+        <link href="/Home.module.css" rel="stylesheet" />
         <link
           href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap"
           rel="stylesheet"
@@ -94,10 +115,10 @@ export default function DrinkPage() {
         {!showDrinkRecipe && !results === true && <Alert />}
         {showDrinkRecipe &&
           <RecipeDetails 
-            name={name}
-            image={image}
-            instructions={instructions}
-            ingredientsList={ingredientsList}
+            name={parsedCocktail.name}
+            image={parsedCocktail.image}
+            instructions={parsedCocktail.instructions}
+            ingredientsList={parsedCocktail.ingredientsList}
           />
         }{" "}
       </main>
