@@ -15,7 +15,6 @@ import Alert from "../components/Alert";
 export default function Home() {
   const [drinkInfo, setDrinkInfo] = useState();
   const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
-  const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const router = useRouter();
@@ -32,7 +31,6 @@ export default function Home() {
     const data = await searchCocktail(searchTerm);
     setResults(data);
     setSearchTerm("");
-    setShowCocktails(true);
   };
 
   const handleShowDrinkRecipe = (result) => {
@@ -87,7 +85,7 @@ export default function Home() {
             handleShowDrinkRecipe={handleShowDrinkRecipe}
           />
         )}
-        {!showDrinkRecipe && !results && showCocktails === true && <Alert />}
+        {!showDrinkRecipe && !results === true && <Alert />}
         {showDrinkRecipe && <RecipeDetails drink={drinkInfo} />}{" "}
       </main>{" "}
     </div>
