@@ -63,7 +63,7 @@ function Navigation(props) {
 
       <ul className={styles.navList}>
         <li className={styles.navItem}>
-          <Link href="/" onClick={props.handleHideDrinksList}>
+          <Link href="/" onClick={props.handleSetAlertFalse}>
             Home
           </Link>
         </li>

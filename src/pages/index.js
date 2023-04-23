@@ -5,19 +5,14 @@ import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import randomCocktail from "./api/randomCocktail";
 import CurrentUser from "../components/auth/CurrentUser";
-import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
 import HomepageIntro from "../components/HomepageIntro";
 import SearchForm from "../components/SearchForm";
-import DrinksList from "../components/DrinksList";
 import Alert from "../components/Alert";
 
 export default function Home() {
-  const [drinkInfo, setDrinkInfo] = useState();
-  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
-  const [showCocktails, setShowCocktails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
+  const [alert, setAlert] = useState(false);
   const router = useRouter();
 
   const currentUser = useContext(CurrentUser);
@@ -26,24 +21,30 @@ export default function Home() {
     event.preventDefault();
     // Prevents users from searching if the search field is empty
     if (searchTerm.trim() === "") {
-        return;
+      return;
     }
-    setShowDrinkRecipe(false);
     const data = await searchCocktail(searchTerm);
-    setResults(data);
     setSearchTerm("");
-    setShowCocktails(true);
+    if (data == undefined) {
+      setAlert(true);
+    }
+    else {
+      // Pushing variables through to page and setting the route
+      router.push({
+        pathname: `/drinks/${searchTerm}`,
+        query: { 
+          drinks: JSON.stringify(data)
+        }
+      })
+    }
   };
 
   const handleShowDrinkRecipe = (result) => {
-    setDrinkInfo(result);
-    setShowDrinkRecipe(true);
-    
     // Pushing variables through to page and setting the route
     router.push({
         pathname: `/drink/${result.idDrink}`,
         query: { 
-            drink: JSON.stringify(result)
+          drink: JSON.stringify(result)
         }
      })
   };
@@ -52,6 +53,10 @@ export default function Home() {
     const data = await randomCocktail();
     handleShowDrinkRecipe(data.recipe);
   };
+
+  const handleSetAlertFalse = () => {
+    setAlert(false);
+  }
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -73,7 +78,10 @@ export default function Home() {
         ></link>{" "}
       </Head>{" "}
       <main className={styles.container}>
-        <Navigation currentUser={currentUser} />
+        <Navigation 
+          currentUser={currentUser} 
+          handleSetAlertFalse={handleSetAlertFalse}
+        />
         <HomepageIntro />
         <SearchForm
           handleSubmit={handleSubmit}
@@ -81,14 +89,7 @@ export default function Home() {
           handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
           searchTerm={searchTerm}
         />{" "}
-        {!showDrinkRecipe && results && (
-          <DrinksList
-            results={results}
-            handleShowDrinkRecipe={handleShowDrinkRecipe}
-          />
-        )}
-        {!showDrinkRecipe && !results && showCocktails === true && <Alert />}
-        {showDrinkRecipe && <RecipeDetails drink={drinkInfo} />}{" "}
+        {alert === true && <Alert />}
       </main>{" "}
     </div>
   );

@@ -43,6 +43,7 @@ class UserDatabaseApi {
   /** Signup for site. */
   static async signup(data) {
     let res = await this.request(`/auth/register`, data, "post");
+    console.log("signup at backend not working");
     return res.token;
   }
 

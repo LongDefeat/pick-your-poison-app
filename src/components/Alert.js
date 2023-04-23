@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles/Alert.module.css";
 
-export default function Alert(props) {
+export default function Alert() {
   return (
     <div id={styles.container}>
         <h1>Whoops!</h1>

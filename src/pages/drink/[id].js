@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import Head from "next/head";
 import searchCocktail from "../api/searchCocktail";
@@ -12,24 +12,33 @@ import DrinksList from "../../components/DrinksList";
 import Alert from "../../components/Alert";
 
 export default function DrinkPage() {
+  const [parsedCocktail, setParsedCocktail] = useState(null);
+  const [alert, setAlert] = useState(false);
+  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
   const router = useRouter();
 
   const {
     query: {drink}
   } = router;
 
-  const parsedCocktail = JSON.parse(drink);
+  // Set the parsedCocktail state when the component mounts
+  useEffect(() => {
+    if (drink) {
+      const parsedCocktail = JSON.parse(drink);
+      const name = parsedCocktail.strDrink;
+      const image = parsedCocktail.strDrinkThumb;
+      const instructions = parsedCocktail.strInstructions;
+      const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
 
-  const name = parsedCocktail.strDrink;
-  const image = parsedCocktail.strDrinkThumb;
-  const instructions = parsedCocktail.strInstructions;
-  const ingredientsList = matchIngredientsWithMeasurements(parsedCocktail);
-
-  const [drinkInfo, setDrinkInfo] = useState();
-  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
-  const [showCocktails, setShowCocktails] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
+      // Set the state to show the RecipeDetails component
+      setShowDrinkRecipe(true);
+      setResults([]);
+      setSearchTerm("");
+      setParsedCocktail({ name, image, instructions, ingredientsList });
+    }
+  }, [drink]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,25 +50,37 @@ export default function DrinkPage() {
     const data = await searchCocktail(searchTerm);
     setResults(data);
     setSearchTerm("");
-    setShowCocktails(true);
+    if (data == undefined) {
+      setAlert(true);
+    }
+    else {
+      // Pushing variables through to page and setting the route
+      router.push({
+        pathname: `/drinks/${searchTerm}`,
+        query: { 
+          drinks: JSON.stringify(data)
+        }
+      })
+    }
   };
 
   const handleShowDrinkRecipe = (result) => {
-    setDrinkInfo(result);
     setShowDrinkRecipe(true);
-    
     // Pushing variables through to page and setting the route
     router.push({
         pathname: `/drink/${result.idDrink}`,
         query: { 
-            drink: JSON.stringify(result)
+          drink: JSON.stringify(result)
         }
      })
   };
 
   const handleShowRandomCocktailRecipe = async () => {
     const data = await randomCocktail();
+    setAlert(false);
     handleShowDrinkRecipe(data.recipe);
+    setResults([]);
+    setSearchTerm("");
   };
 
   const handleChange = (e) => {
@@ -70,7 +91,7 @@ export default function DrinkPage() {
     <div>
       <Head>
         <title> Nightcapp Cocktail Details </title>
-        <link href="Home.module.css" rel="stylesheet" />
+        <link href="/Home.module.css" rel="stylesheet" />
         <link
           href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap"
           rel="stylesheet"
@@ -90,19 +111,18 @@ export default function DrinkPage() {
           handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
           searchTerm={searchTerm}
         />{" "}
-         {!showDrinkRecipe && results && (
-          <DrinksList
+         {!alert && <DrinksList
             results={results}
             handleShowDrinkRecipe={handleShowDrinkRecipe}
           />
-        )}
-        {!showDrinkRecipe && !results && showCocktails === true && <Alert />}
+        }
+        {alert === true && <Alert />}
         {showDrinkRecipe &&
           <RecipeDetails 
-            name={name}
-            image={image}
-            instructions={instructions}
-            ingredientsList={ingredientsList}
+            name={parsedCocktail.name}
+            image={parsedCocktail.image}
+            instructions={parsedCocktail.instructions}
+            ingredientsList={parsedCocktail.ingredientsList}
           />
         }{" "}
       </main>
