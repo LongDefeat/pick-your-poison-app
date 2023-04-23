@@ -12,8 +12,7 @@ import Alert from "../components/Alert";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
-  const [results, setResults] = useState([]);
+  const [alert, setAlert] = useState(false);
   const router = useRouter();
 
   const currentUser = useContext(CurrentUser);
@@ -22,24 +21,24 @@ export default function Home() {
     event.preventDefault();
     // Prevents users from searching if the search field is empty
     if (searchTerm.trim() === "") {
-        return;
+      return;
     }
     const data = await searchCocktail(searchTerm);
     setSearchTerm("");
-    setResults(data);
-
+    if (data == undefined) {
+      setAlert(true);
+    }
     // Pushing variables through to page and setting the route
     router.push({
       pathname: `/drinks/${searchTerm}`,
       query: { 
-          drinks: JSON.stringify(data)
+        drinks: JSON.stringify(data)
       }
     })
   };
 
   const handleShowDrinkRecipe = (result) => {
     // Pushing variables through to page and setting the route
-    setShowDrinkRecipe(true);
     router.push({
         pathname: `/drink/${result.idDrink}`,
         query: { 
@@ -81,7 +80,7 @@ export default function Home() {
           handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
           searchTerm={searchTerm}
         />{" "}
-        {!showDrinkRecipe && !results === true && <Alert />}
+        {alert === true && <Alert />}
       </main>{" "}
     </div>
   );
