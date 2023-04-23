@@ -6,9 +6,20 @@
     border-radius: 20px;
     max-width: 33%;
     padding: 1rem 1.5rem 2rem 1.5rem;
-    box-shadow: 0 0 32px 8px #D793BB;
     margin: 10vh auto;
+    animation: jump .4s ease-in-out;
+    box-shadow: 0 0 16px 8px #D793BB;
 }
+
+@keyframes jump {
+    0% {
+    }
+    50% {
+      box-shadow: 0 0px 32px 8px #D793BB;
+    }
+    100% {
+    }
+  }
 
 @media (max-width: 810px) {
     #container {
@@ -16,7 +27,7 @@
         padding: 1rem 1.5rem 2rem 1.5rem;
         max-width: 60%;
     }
-  }
+}
 
 @media (max-width: 1024px) {
     #container {
