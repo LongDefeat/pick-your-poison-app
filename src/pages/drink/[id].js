@@ -13,6 +13,7 @@ import Alert from "../../components/Alert";
 
 export default function DrinkPage() {
   const [parsedCocktail, setParsedCocktail] = useState(null);
+  const [alert, setAlert] = useState(false);
   const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -49,14 +50,18 @@ export default function DrinkPage() {
     const data = await searchCocktail(searchTerm);
     setResults(data);
     setSearchTerm("");
-
-    // Pushing variables through to page and setting the route
-    router.push({
-      pathname: `/drinks/${searchTerm}`,
-      query: { 
-        drinks: JSON.stringify(data)
-      }
-    })
+    if (data == undefined) {
+      setAlert(true);
+    }
+    else {
+      // Pushing variables through to page and setting the route
+      router.push({
+        pathname: `/drinks/${searchTerm}`,
+        query: { 
+          drinks: JSON.stringify(data)
+        }
+      })
+    }
   };
 
   const handleShowDrinkRecipe = (result) => {
@@ -72,6 +77,7 @@ export default function DrinkPage() {
 
   const handleShowRandomCocktailRecipe = async () => {
     const data = await randomCocktail();
+    setAlert(false);
     handleShowDrinkRecipe(data.recipe);
     setResults([]);
     setSearchTerm("");
@@ -105,13 +111,12 @@ export default function DrinkPage() {
           handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
           searchTerm={searchTerm}
         />{" "}
-         {!showDrinkRecipe && results && (
-          <DrinksList
+         {!alert && <DrinksList
             results={results}
             handleShowDrinkRecipe={handleShowDrinkRecipe}
           />
-        )}
-        {!showDrinkRecipe && !results === true && <Alert />}
+        }
+        {alert === true && <Alert />}
         {showDrinkRecipe &&
           <RecipeDetails 
             name={parsedCocktail.name}
