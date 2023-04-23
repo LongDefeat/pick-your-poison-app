@@ -54,6 +54,10 @@ export default function Home() {
     handleShowDrinkRecipe(data.recipe);
   };
 
+  const handleSetAlertFalse = () => {
+    setAlert(false);
+  }
+
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -74,7 +78,10 @@ export default function Home() {
         ></link>{" "}
       </Head>{" "}
       <main className={styles.container}>
-        <Navigation currentUser={currentUser} />
+        <Navigation 
+          currentUser={currentUser} 
+          handleSetAlertFalse={handleSetAlertFalse}
+        />
         <HomepageIntro />
         <SearchForm
           handleSubmit={handleSubmit}
@@ -87,4 +94,3 @@ export default function Home() {
     </div>
   );
 }
-
