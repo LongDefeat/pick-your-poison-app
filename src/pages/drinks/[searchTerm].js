@@ -17,9 +17,9 @@ export default function DrinksPage() {
 
     const {
         query: {drinks}
-      } = router;
-    
-      // Set the parsedCocktail state when the component mounts
+    } = router;
+
+    // Set the parsedCocktail state when the component mounts
     useEffect(() => {
         if (drinks) {
             const parsedDrinks = JSON.parse(drinks);
@@ -94,10 +94,10 @@ export default function DrinksPage() {
                 handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
                 searchTerm={searchTerm}
             />{" "}
-            <DrinksList
+            {!alert && <DrinksList
                 results={parsedCocktails}
                 handleShowDrinkRecipe={handleShowDrinkRecipe}
-            />
+            />}
             {alert === true && <Alert />}
           </main>{" "}
         </div>
