@@ -3,20 +3,16 @@ import { useRouter } from 'next/router';
 import Head from "next/head";
 import searchCocktail from "../api/searchCocktail";
 import randomCocktail from "../api/randomCocktail";
-import { matchIngredientsWithMeasurements } from "../api/searchCocktail";
 import HomepageIntro from "../../components/HomepageIntro";
 import SearchForm from "../../components/SearchForm";
 import Navigation from "../../components/routes-nav/Navigation";
-import RecipeDetails from "../../components/RecipeDetails";
 import DrinksList from "../../components/DrinksList";
 import Alert from "../../components/Alert";
 
 export default function DrinksPage() {
     const [parsedCocktails, setParsedCocktails] = useState([]);
-    const [parsedCocktail, setParsedCocktail] = useState(null);
-    const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
+    const [alert, setAlert] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [results, setResults] = useState([]);
     const router = useRouter();
 
     const {
@@ -39,7 +35,9 @@ export default function DrinksPage() {
         }
         setShowDrinkRecipe(false);
         const data = await searchCocktail(searchTerm);
-        setResults(data);
+        if (data == undefined) {
+            setAlert(true);
+        }
         setSearchTerm("");
    
         // Pushing variables through to page and setting the route
@@ -52,7 +50,6 @@ export default function DrinksPage() {
     };
 
     const handleShowDrinkRecipe = (result) => {
-        setShowDrinkRecipe(true);
         
         // Pushing variables through to page and setting the route
         router.push({
@@ -103,7 +100,7 @@ export default function DrinksPage() {
                 results={parsedCocktails}
                 handleShowDrinkRecipe={handleShowDrinkRecipe}
             />
-            {!showDrinkRecipe && !results === true && <Alert />}
+            {alert === true && <Alert />}
           </main>{" "}
         </div>
     );
