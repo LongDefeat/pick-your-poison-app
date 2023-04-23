@@ -63,7 +63,6 @@ export default function DrinksPage() {
     const handleShowRandomCocktailRecipe = async () => {
         const data = await randomCocktail();
         handleShowDrinkRecipe(data.recipe);
-        setShowDrinkRecipe(true);
         setResults([]);
         setSearchTerm("");
     };
