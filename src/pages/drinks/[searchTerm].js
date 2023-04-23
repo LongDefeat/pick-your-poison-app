@@ -65,13 +65,7 @@ export default function DrinksPage() {
 
     const handleShowRandomCocktailRecipe = async () => {
         const data = await randomCocktail();
-        const parsedCocktail = {
-          name: data.recipe.strDrink,
-          image: data.recipe.strDrinkThumb,
-          instructions: data.recipe.strInstructions,
-          ingredientsList: matchIngredientsWithMeasurements(data.recipe)
-        };
-        setParsedCocktail(parsedCocktail);
+        handleShowDrinkRecipe(data.recipe);
         setShowDrinkRecipe(true);
         setResults([]);
         setSearchTerm("");
