@@ -33,7 +33,6 @@ export default function DrinksPage() {
         if (searchTerm.trim() === "") {
             return;
         }
-        setShowDrinkRecipe(false);
         const data = await searchCocktail(searchTerm);
         if (data == undefined) {
             setAlert(true);
