@@ -34,6 +34,7 @@ export default function DrinksPage() {
             return;
         }
         const data = await searchCocktail(searchTerm);
+        setAlert(false);
         if (data == undefined) {
             setAlert(true);
         }
