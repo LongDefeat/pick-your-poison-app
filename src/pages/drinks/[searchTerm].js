@@ -26,12 +26,8 @@ export default function DrinksPage() {
       // Set the parsedCocktail state when the component mounts
     useEffect(() => {
         if (drinks) {
-            console.log(drinks);
             const parsedDrinks = JSON.parse(drinks);
             setParsedCocktails(parsedDrinks);
-        }
-        else {
-            console.log("No drinks");
         }
     }, [drinks]);
 
