@@ -28,13 +28,15 @@ export default function Home() {
     if (data == undefined) {
       setAlert(true);
     }
-    // Pushing variables through to page and setting the route
-    router.push({
-      pathname: `/drinks/${searchTerm}`,
-      query: { 
-        drinks: JSON.stringify(data)
-      }
-    })
+    else {
+      // Pushing variables through to page and setting the route
+      router.push({
+        pathname: `/drinks/${searchTerm}`,
+        query: { 
+          drinks: JSON.stringify(data)
+        }
+      })
+    }
   };
 
   const handleShowDrinkRecipe = (result) => {
@@ -85,3 +87,4 @@ export default function Home() {
     </div>
   );
 }
+
