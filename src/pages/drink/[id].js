@@ -12,6 +12,7 @@ import DrinksList from "../../components/DrinksList";
 import Alert from "../../components/Alert";
 
 export default function DrinkPage() {
+  const [parsedCocktail, setParsedCocktail] = useState(null);
   const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -38,8 +39,6 @@ export default function DrinkPage() {
     }
   }, [drink]);
 
-  const [parsedCocktail, setParsedCocktail] = useState(null);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Prevents users from searching if the search field is empty
@@ -54,12 +53,11 @@ export default function DrinkPage() {
 
   const handleShowDrinkRecipe = (result) => {
     setShowDrinkRecipe(true);
-    // console.log(result);
     // Pushing variables through to page and setting the route
     router.push({
         pathname: `/drink/${result.idDrink}`,
         query: { 
-            drink: JSON.stringify(result)
+          drink: JSON.stringify(result)
         }
      })
   };
