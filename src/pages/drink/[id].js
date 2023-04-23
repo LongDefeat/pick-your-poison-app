@@ -49,6 +49,14 @@ export default function DrinkPage() {
     const data = await searchCocktail(searchTerm);
     setResults(data);
     setSearchTerm("");
+
+    // Pushing variables through to page and setting the route
+    router.push({
+      pathname: `/drinks/${searchTerm}`,
+      query: { 
+        drinks: JSON.stringify(data)
+      }
+    })
   };
 
   const handleShowDrinkRecipe = (result) => {
@@ -64,14 +72,7 @@ export default function DrinkPage() {
 
   const handleShowRandomCocktailRecipe = async () => {
     const data = await randomCocktail();
-    const parsedCocktail = {
-      name: data.recipe.strDrink,
-      image: data.recipe.strDrinkThumb,
-      instructions: data.recipe.strInstructions,
-      ingredientsList: matchIngredientsWithMeasurements(data.recipe)
-    };
-    setParsedCocktail(parsedCocktail);
-    setShowDrinkRecipe(true);
+    handleShowDrinkRecipe(data.recipe);
     setResults([]);
     setSearchTerm("");
   };
