@@ -5,17 +5,14 @@ import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import randomCocktail from "./api/randomCocktail";
 import CurrentUser from "../components/auth/CurrentUser";
-import RecipeDetails from "../components/RecipeDetails";
 import Navigation from "../components/routes-nav/Navigation";
 import HomepageIntro from "../components/HomepageIntro";
 import SearchForm from "../components/SearchForm";
-import DrinksList from "../components/DrinksList";
 import Alert from "../components/Alert";
 
 export default function Home() {
-  const [drinkInfo, setDrinkInfo] = useState();
-  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showDrinkRecipe, setShowDrinkRecipe] = useState(false);
   const [results, setResults] = useState([]);
   const router = useRouter();
 
@@ -27,21 +24,26 @@ export default function Home() {
     if (searchTerm.trim() === "") {
         return;
     }
-    setShowDrinkRecipe(false);
     const data = await searchCocktail(searchTerm);
-    setResults(data);
     setSearchTerm("");
+    setResults(data);
+
+    // Pushing variables through to page and setting the route
+    router.push({
+      pathname: `/drinks/${searchTerm}`,
+      query: { 
+          drinks: JSON.stringify(data)
+      }
+    })
   };
 
   const handleShowDrinkRecipe = (result) => {
-    setDrinkInfo(result);
-    setShowDrinkRecipe(true);
-    
     // Pushing variables through to page and setting the route
+    setShowDrinkRecipe(true);
     router.push({
         pathname: `/drink/${result.idDrink}`,
         query: { 
-            drink: JSON.stringify(result)
+          drink: JSON.stringify(result)
         }
      })
   };
@@ -79,14 +81,7 @@ export default function Home() {
           handleShowRandomCocktailRecipe={handleShowRandomCocktailRecipe}
           searchTerm={searchTerm}
         />{" "}
-        {!showDrinkRecipe && results && (
-          <DrinksList
-            results={results}
-            handleShowDrinkRecipe={handleShowDrinkRecipe}
-          />
-        )}
         {!showDrinkRecipe && !results === true && <Alert />}
-        {showDrinkRecipe && <RecipeDetails drink={drinkInfo} />}{" "}
       </main>{" "}
     </div>
   );
