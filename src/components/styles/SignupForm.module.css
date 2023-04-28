@@ -1,5 +1,5 @@
 .signupIntro {
-  margin: 12px;
+  margin: 2.5% 12px 12px 12px;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -8,24 +8,38 @@
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f09,
     0 0 82px #f09, 0 0 92px #f09, 0 0 102px #f09, 0 0 151px #f09;
-  font-size: 35px;
+  font-size: 3rem;
   animation: pulsate 0.11s ease-in-out infinite alternate;
 }
 
+@media (max-width: 660px) {
+  .signupIntro {
+    font-size: 2rem;
+  }
+}
+
 .signupForm {
+  display: flex;
+  align-content: center;
+  justify-content: center;
   max-width: 400px;
   margin: 0 auto;
   margin-top: 30px;
+  margin-bottom: 80px;
   padding: 40px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: #ecefe2;
-  background-color: #6e4587;
+  background-color: #000000;
+  border: 2px solid #8495ca;
 }
 
-.signupForm h2 {
-  margin-bottom: 10px;
+#imageContainer {
+  padding-top: .2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-bottom: 25px;
 }
 
 .formGroup {
@@ -33,8 +47,9 @@
 }
 
 .label {
-  font-size: 14px;
-  font-weight: bold;
+  padding-right: 1rem;
+  font-size: 1.25rem;
+  font-family: 'League Spartan', sans-serif;
   color: #e0d2e9;
 }
 
@@ -42,6 +57,7 @@
 .input[type="password"] {
   width: 100%;
   padding: 10px;
+  margin-top: 12px;
   border-radius: 5px;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -51,10 +67,11 @@
 .btn[type="submit"] {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 15px;
+  margin-top: 50px;
   border-radius: 5px;
   border: none;
-  background-color: #0070f3;
+  background-color: #d793bb;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -62,16 +79,6 @@
 }
 
 .btn[type="submit"]:hover {
-  background-color: #4180ce;
-  animation: jump 1s ease-in-out;
-}
-
-@keyframes jump {
-  0% {
-  }
-  50% {
-    box-shadow: 0 8px 16px 0 #d793bb;
-  }
-  100% {
-  }
+  color: #8f88e6;
+  background-color: white;
 }
