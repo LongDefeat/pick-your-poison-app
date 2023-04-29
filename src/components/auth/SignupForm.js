@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Image from "next/image";
+import cocktailImg from "../../../public/cocktail.jpg";
 import styles from "../styles/SignupForm.module.css";
 import UserDatabaseApi from "../../pages/api/users/UserDatabaseApi";
 
@@ -46,12 +48,20 @@ function SignupForm({}) {
       <h3 className={styles.signupIntro}>Sign up with us today!</h3>
       <div className={styles.signupForm}>
         <form>
-          <div className={styles.formGroup}>
+          <div id={styles.imageContainer}>
+            <Image 
+            src={cocktailImg} 
+            alt="cocktail image" 
+            width={250} 
+            height={170}
+            />
+          </div>
+          <div className={styles.formGroup}>     
             <label className={styles.label} htmlFor="firstName">
               First Name:
             </label>
             <input
-              className="input"
+              className={styles.input}
               type="text"
               id="firstName"
               name="firstName"
@@ -66,7 +76,7 @@ function SignupForm({}) {
               Last Name:
             </label>
             <input
-              className="input"
+              className={styles.input}
               type="text"
               id="lastName"
               name="lastName"
@@ -81,7 +91,7 @@ function SignupForm({}) {
               Username:
             </label>
             <input
-              className="input"
+              className={styles.input}
               type="text"
               id="username"
               name="username"
@@ -96,7 +106,7 @@ function SignupForm({}) {
               Password:
             </label>
             <input
-              className="input"
+              className={styles.input}
               type="password"
               id="password"
               name="password"
