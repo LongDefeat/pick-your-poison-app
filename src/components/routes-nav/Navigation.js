@@ -50,7 +50,7 @@ function Navigation(props) {
             <Link href="/">Log In</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/">Sign Up</Link>
+            <Link href="/signup">Sign Up</Link>
           </li>
         </ul>
       </div>
@@ -58,22 +58,7 @@ function Navigation(props) {
   }
 
   return (
-    <div className={styles.nav}>
-      {token ? loggedInNav() : loggedOutNav()}
-
-      <ul className={styles.navList}>
-        <li className={styles.navItem}>
-          <Link href="/" onClick={props.handleSetAlertFalse}>
-            Home
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href="/about" legacyBehavior>
-            About Us
-          </Link>
-        </li>
-      </ul>
-    </div>
+    <div className={styles.nav}>{token ? loggedInNav() : loggedOutNav()}</div>
   );
 }
 
