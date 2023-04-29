@@ -4,7 +4,6 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import searchCocktail from "./api/searchCocktail";
 import randomCocktail from "./api/randomCocktail";
-import CurrentUser from "../components/auth/CurrentUser";
 import Navigation from "../components/routes-nav/Navigation";
 import HomepageIntro from "../components/HomepageIntro";
 import SearchForm from "../components/SearchForm";
@@ -14,8 +13,6 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [alert, setAlert] = useState(false);
   const router = useRouter();
-
-  const currentUser = useContext(CurrentUser);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,26 +24,25 @@ export default function Home() {
     setSearchTerm("");
     if (data == undefined) {
       setAlert(true);
-    }
-    else {
+    } else {
       // Pushing variables through to page and setting the route
       router.push({
         pathname: `/drinks/${searchTerm}`,
-        query: { 
-          drinks: JSON.stringify(data)
-        }
-      })
+        query: {
+          drinks: JSON.stringify(data),
+        },
+      });
     }
   };
 
   const handleShowDrinkRecipe = (result) => {
     // Pushing variables through to page and setting the route
     router.push({
-        pathname: `/drink/${result.idDrink}`,
-        query: { 
-          drink: JSON.stringify(result)
-        }
-     })
+      pathname: `/drink/${result.idDrink}`,
+      query: {
+        drink: JSON.stringify(result),
+      },
+    });
   };
 
   const handleShowRandomCocktailRecipe = async () => {
@@ -56,14 +52,14 @@ export default function Home() {
 
   const handleSetAlertFalse = () => {
     setAlert(false);
-  }
+  };
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   return (
-    <div>
+    <>
       <Head>
         <title> Nightcapp </title>{" "}
         <link href="Home.module.css" rel="stylesheet" />
@@ -78,10 +74,7 @@ export default function Home() {
         ></link>{" "}
       </Head>{" "}
       <main className={styles.container}>
-        <Navigation 
-          currentUser={currentUser} 
-          handleSetAlertFalse={handleSetAlertFalse}
-        />
+        <Navigation handleSetAlertFalse={handleSetAlertFalse} />
         <HomepageIntro />
         <SearchForm
           handleSubmit={handleSubmit}
@@ -91,6 +84,6 @@ export default function Home() {
         />{" "}
         {alert === true && <Alert />}
       </main>{" "}
-    </div>
+    </>
   );
 }

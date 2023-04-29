@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Image from "next/image";
 import cocktailImg from "../../../public/cocktail.jpg";
 import styles from "../styles/SignupForm.module.css";
 import UserDatabaseApi from "../../pages/api/users/UserDatabaseApi";
+import CurrentUserContext from "./CurrentUserContext";
 
 function SignupForm({}) {
   // const navigate = useNavigate();
+
+  const { setToken } = useContext(CurrentUserContext);
 
   const [signupFormData, setSignUpFormData] = useState({
     username: "",
@@ -49,14 +52,14 @@ function SignupForm({}) {
       <div className={styles.signupForm}>
         <form>
           <div id={styles.imageContainer}>
-            <Image 
-            src={cocktailImg} 
-            alt="cocktail image" 
-            width={250} 
-            height={170}
+            <Image
+              src={cocktailImg}
+              alt="cocktail image"
+              width={250}
+              height={170}
             />
           </div>
-          <div className={styles.formGroup}>     
+          <div className={styles.formGroup}>
             <label className={styles.label} htmlFor="firstName">
               First Name:
             </label>

@@ -4,7 +4,7 @@ import styles from "../styles/Navigation.module.css";
 import UserContext from "../auth/CurrentUserContext";
 
 function Navigation(props) {
-  // const { currentUser } = useContext(UserContext);
+  const { token } = useContext(UserContext);
 
   function loggedInNav() {
     return (
@@ -59,7 +59,7 @@ function Navigation(props) {
 
   return (
     <div className={styles.nav}>
-      {/* {currentUser ? loggedInNav() : loggedOutNav()} */}
+      {token ? loggedInNav() : loggedOutNav()}
 
       <ul className={styles.navList}>
         <li className={styles.navItem}>
