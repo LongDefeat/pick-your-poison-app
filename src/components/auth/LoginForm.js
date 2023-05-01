@@ -3,7 +3,7 @@ import UserDatabaseApi from "../../pages/api/users/UserDatabaseApi";
 import Image from "next/image";
 // import cocktailImg from ".././public/cocktail.jpg";
 import CurrentUserContext from "./CurrentUserContext";
-import styles from "../../styles/LoginForm.module.css";
+import styles from "../styles/LoginForm.module.css";
 
 function LoginForm() {
   const { setToken } = useContext(CurrentUserContext);
