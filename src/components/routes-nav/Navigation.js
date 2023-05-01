@@ -47,7 +47,7 @@ function Navigation(props) {
             </Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/">Log In</Link>
+            <Link href="/login">Log In</Link>
           </li>
           <li className={styles.navItem}>
             <Link href="/signup">Sign Up</Link>

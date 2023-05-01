@@ -49,7 +49,7 @@ class UserDatabaseApi {
 
   /** Get token for login from username, password */
   static async login(data) {
-    let res = await this.request(`/auth/token`, data, "post");
+    let res = await this.request(`/auth/signin`, data, "post");
     return res.token;
   }
 }

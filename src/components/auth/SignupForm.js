@@ -7,7 +7,7 @@ import UserDatabaseApi from "../../pages/api/users/UserDatabaseApi";
 import CurrentUserContext from "./CurrentUserContext";
 
 function SignupForm({}) {
-  // const navigate = useNavigate();
+  // const navigate = useNavitate();
 
   const { setToken } = useContext(CurrentUserContext);
 
@@ -29,6 +29,8 @@ function SignupForm({}) {
       return { success: false, errors };
     }
   }
+
+  async function handleSuccess(e) {}
 
   async function handleSubmit(e) {
     e.preventDefault();
