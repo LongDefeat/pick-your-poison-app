@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import UserDatabaseApi from "../../pages/api/users/UserDatabaseApi";
-import Image from "next/image";
-// import cocktailImg from ".././public/cocktail.jpg";
+import Link from "next/link";
 import CurrentUserContext from "./CurrentUserContext";
 import styles from "../styles/LoginForm.module.css";
 
@@ -81,6 +80,9 @@ function LoginForm() {
               Log In
             </button>
           </div>
+          <Link className={styles.btnSignup} type="submit" href="/signup">
+            New here? Sign up!
+          </Link>
         </form>
       </div>
     </>
